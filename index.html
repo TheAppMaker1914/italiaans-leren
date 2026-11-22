@@ -109,6 +109,61 @@ footer{text-align:center;color:#718078;font-size:12px;padding:25px}
 <p>Je kunt ook zeggen: <b>Sono Marco.</b> Het woord 'io' is dan weggelaten.</p>
 </div>
 <button class="primary" onclick="complete(0)">Les gelezen ✓</button>
+  
+<div class="card">
+<div class="muted">LES 2 · BEGINNER · 10 MINUTEN</div>
+<h2>Het werkwoord AVERE (hebben)</h2>
+<p>In deze les leer je hoe je het Italiaanse werkwoord avere vervoegt. Je gebruikt dit om te vertellen wat je hebt, maar ook om je leeftijd aan te geven.</p>
+
+<h3>De vervoeging</h3>
+<div class="word"><span>Io ho</span><b>Ik heb</b></div>
+<div class="word"><span>Tu hai</span><b>Jij hebt</b></div>
+<div class="word"><span>Lui / Lei ha</span><b>Hij / zij heeft</b></div>
+<div class="word"><span>Noi abbiamo</span><b>Wij hebben</b></div>
+<div class="word"><span>Voi avete</span><b>Jullie hebben</b></div>
+<div class="word"><span>Loro hanno</span><b>Zij hebben</b></div>
+
+<p><b>Uitspraak:</b> De H spreek je niet uit. Ho klinkt dus als 'o'.</p>
+</div>
+
+<div class="card">
+<h3>Wanneer gebruik je AVERE?</h3>
+<p><b>Ho una macchina.</b><br>Ik heb een auto.</p>
+<p><b>Hai un cane.</b><br>Jij hebt een hond.</p>
+<p><b>Ho fame.</b><br>Ik heb honger.</p>
+<p><b>Ho sete.</b><br>Ik heb dorst.</p>
+<p><b>Ho sonno.</b><br>Ik ben slaperig.</p>
+<p><b>Ho caldo.</b><br>Ik heb het warm.</p>
+</div>
+
+<div class="card">
+<h3>Een belangrijk verschil</h3>
+<p>In het Nederlands zeggen we: ik BEN twintig jaar oud.</p>
+<p>In het Italiaans gebruik je hiervoor AVERE:</p>
+<p class="big">Ho vent'anni.</p>
+<p>Letterlijk: ik heb twintig jaren.</p>
+<p><b>Quanti anni hai?</b><br>Hoe oud ben jij?</p>
+</div>
+
+<div class="card">
+<h3>Oefening: vertaal naar het Italiaans</h3>
+<p>Hoe zeg je: 'Ik heb een hond'?</p>
+<button class="option" onclick="this.parentElement.querySelector('#a2').textContent='Niet helemaal. Probeer: Ho un cane.'">Io sono un cane</button>
+<button class="option" onclick="this.parentElement.querySelector('#a2').textContent='Goed gedaan! Ho un cane betekent Ik heb een hond. 🇮🇹'">Ho un cane</button>
+<button class="option" onclick="this.parentElement.querySelector('#a2').textContent='Niet helemaal. Probeer: Ho un cane.'">Tu hai un cane</button>
+<p id="a2"></p>
+</div>
+
+<div class="card">
+<h3>Zelf proberen ✍️</h3>
+<p>Vertaal: 'Ik heb honger en ik heb dorst.'</p>
+<textarea id="lesson2answer" placeholder="Schrijf je Italiaanse antwoord..."></textarea>
+<button class="secondary" onclick="document.getElementById('lesson2feedback').textContent=document.getElementById('lesson2answer').value.toLowerCase().includes('ho fame')&&document.getElementById('lesson2answer').value.toLowerCase().includes('ho sete')?'Fantastico! Je hebt het goed! 🇮🇹':'Tip: begin met Ho fame e ...'">Controleer antwoord</button>
+<p id="lesson2feedback"></p>
+</div>
+
+<button class="primary" onclick="complete(4)">Les 2 afgerond ✓</button>
+
 </section>
 
 <section id="words" class="hidden">
@@ -178,8 +233,8 @@ if(id==='quiz')renderQuestion();
 }
 function update(){
 let n=done.filter(Boolean).length;
-document.getElementById('bar').style.width=(n/4*100)+'%';
-document.getElementById('progressText').textContent=n+' van 4 onderdelen afgerond';
+document.getElementById('bar').style.width=(n/5*100)+'%';
+document.getElementById('progressText').textContent=n+' van 5 onderdelen afgerond';
 localStorage.setItem('italianoDone',JSON.stringify(done));
 }
 function complete(i){
