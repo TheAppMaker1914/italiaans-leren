@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b50">
+<title>Italiano - Leer Italiaans</title>
+<style>
+:root{--green:#176b50;--light:#eaf5ef;--cream:#faf8f1;--ink:#24352e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
+header{background:var(--green);color:white;padding:25px 20px;border-radius:0 0 24px 24px}
+header h1{margin:8px 0;font-size:28px}
+main{max-width:700px;margin:auto;padding:16px}
+nav{display:flex;gap:7px;overflow-x:auto;margin:15px 0}
+nav button{border:0;border-radius:20px;padding:11px 14px;background:#e5e9e5;white-space:nowrap}
+nav button.active{background:var(--green);color:white}
+.card{background:white;border-radius:16px;padding:18px;margin:13px 0;box-shadow:0 3px 12px #00000009}
+h2{font-size:21px}
+h3{margin-bottom:8px}
+p{line-height:1.55}
+.muted{color:#718078;font-size:14px}
+.big{font-size:23px;font-weight:bold;color:var(--green)}
+.primary{background:var(--green);color:white;border:0;border-radius:11px;padding:13px 17px;font-size:15px}
+.secondary{background:var(--light);color:var(--green);border:0;border-radius:10px;padding:12px}
+.word{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #eee}
+.progress{height:10px;background:#e5eae5;border-radius:10px;overflow:hidden}
+.progress div{height:100%;background:#4ba77c;width:0}
+.hidden{display:none}
+input,textarea{width:100%;padding:13px;border:1px solid #d8dfd9;border-radius:10px;font-size:16px;margin:8px 0}
+.option{display:block;width:100%;text-align:left;background:#f1f5f1;border:2px solid transparent;border-radius:11px;padding:13px;margin:8px 0;font-size:15px}
+.option:focus,.option:hover{border-color:var(--green)}
+footer{text-align:center;color:#718078;font-size:12px;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<small>JOUW PERSOONLIJKE ITALIAANSE CURSUS</small>
+<h1>🇮🇹 Italiano</h1>
+<p>Elke dag een stapje dichter bij vloeiend Italiaans.</p>
+</header>
+
+<main>
+<div class="card">
+<div class="muted">JOUW DAGELIJKSE DOEL</div>
+<h2>10 minuten Italiaans</h2>
+<div class="progress"><div id="bar"></div></div>
+<p id="progressText" class="muted">0 van 4 onderdelen afgerond</p>
+</div>
+
+<nav>
+<button class="active" onclick="show('home',this)">Start</button>
+<button onclick="show('lesson',this)">Les</button>
+<button onclick="show('words',this)">Woorden</button>
+<button onclick="show('talk',this)">Gesprek</button>
+<button onclick="show('quiz',this)">Quiz</button>
+</nav>
+
+<section id="home">
+<div class="card">
+<h2>Benvenuto! 👋</h2>
+<p>Welkom bij je Italiaanse cursus. We beginnen bij de basis en bouwen rustig op. Je leert grammatica, zinsopbouw, spreken en schrijven.</p>
+<p><b>Vandaag:</b> jezelf voorstellen en het werkwoord essere (zijn).</p>
+<button class="primary" onclick="show('lesson',document.querySelectorAll('nav button')[1])">Begin met les 1 →</button>
+</div>
+<div class="card">
+<h3>Jouw leerroute</h3>
+<p>📘 Grammatica en zinsopbouw</p>
+<p>🗣️ Spreken en gesprekken</p>
+<p>✍️ Zelf zinnen schrijven</p>
+<p>🧠 Woorden en quizzen</p>
+</div>
+</section>
+
+<section id="lesson" class="hidden">
+<div class="card">
+<div class="muted">LES 1 · BEGINNER</div>
+<h2>Jezelf voorstellen</h2>
+<p>Het Italiaanse werkwoord <b>essere</b> betekent 'zijn'. Je gebruikt het om te vertellen wie je bent of hoe je je voelt.</p>
+<h3>Persoonlijke voornaamwoorden</h3>
+<div class="word"><span>Io</span><b>Ik</b></div>
+<div class="word"><span>Tu</span><b>Jij</b></div>
+<div class="word"><span>Lui</span><b>Hij</b></div>
+<div class="word"><span>Lei</span><b>Zij / u</b></div>
+<div class="word"><span>Noi</span><b>Wij</b></div>
+<div class="word"><span>Voi</span><b>Jullie</b></div>
+<div class="word"><span>Loro</span><b>Zij (meervoud)</b></div>
+</div>
+
+<div class="card">
+<h3>Grammatica: essere vervoegen</h3>
+<p>Het werkwoord verandert afhankelijk van de persoon.</p>
+<div class="word"><span>Io sono</span><b>Ik ben</b></div>
+<div class="word"><span>Tu sei</span><b>Jij bent</b></div>
+<div class="word"><span>Lui / Lei è</span><b>Hij / zij is</b></div>
+<div class="word"><span>Noi siamo</span><b>Wij zijn</b></div>
+<div class="word"><span>Voi siete</span><b>Jullie zijn</b></div>
+<div class="word"><span>Loro sono</span><b>Zij zijn</b></div>
+<p><b>Belangrijk:</b> In het Italiaans laat je het persoonlijk voornaamwoord vaak weg. 'Sono olandese' betekent dus 'Ik ben Nederlands'.</p>
+</div>
+
+<div class="card">
+<h3>Zinsopbouw</h3>
+<p>Een eenvoudige Italiaanse zin heeft vaak deze volgorde:</p>
+<p class="big">Persoon + werkwoord + aanvulling</p>
+<p><b>Io sono Marco.</b><br>Ik ben Marco.</p>
+<p><b>Tu sei italiano.</b><br>Jij bent Italiaans.</p>
+<p><b>Noi siamo amici.</b><br>Wij zijn vrienden.</p>
+<p>Je kunt ook zeggen: <b>Sono Marco.</b> Het woord 'io' is dan weggelaten.</p>
+</div>
+<button class="primary" onclick="complete(0)">Les gelezen ✓</button>
+</section>
+
+<section id="words" class="hidden">
+<div class="card">
+<h2>Woorden van vandaag</h2>
+<p class="muted">Lees ze hardop en probeer ze te onthouden.</p>
+<div class="word"><span>Buongiorno</span><b>Goedemorgen</b></div>
+<div class="word"><span>Buonasera</span><b>Goedenavond</b></div>
+<div class="word"><span>Ciao</span><b>Hoi / dag</b></div>
+<div class="word"><span>Grazie</span><b>Bedankt</b></div>
+<div class="word"><span>Per favore</span><b>Alstublieft</b></div>
+<div class="word"><span>Mi chiamo...</span><b>Ik heet...</b></div>
+<div class="word"><span>Piacere</span><b>Aangenaam</b></div>
+<div class="word"><span>Olandese</span><b>Nederlands</b></div>
+<button class="primary" onclick="complete(1)">Woorden geoefend ✓</button>
+</div>
+</section>
+
+<section id="talk" class="hidden">
+<div class="card">
+<h2>🗣️ Bij een Italiaans café</h2>
+<p>Lees het gesprek hardop.</p>
+<p><b>Barista:</b> Buongiorno! Come ti chiami?</p>
+<p class="muted">Goedemorgen! Hoe heet je?</p>
+<p><b>Tu:</b> Ciao! Mi chiamo ...</p>
+<p class="muted">Hoi! Ik heet ...</p>
+<p><b>Barista:</b> Piacere! Sei italiano?</p>
+<p class="muted">Aangenaam! Ben je Italiaans?</p>
+<p><b>Tu:</b> No, sono olandese.</p>
+<p class="muted">Nee, ik ben Nederlands.</p>
+<p><b>Barista:</b> Piacere!</p>
+<p class="muted">Aangenaam!</p>
+<button class="primary" onclick="complete(2)">Gesprek geoefend ✓</button>
+</div>
+<div class="card">
+<h3>Jouw beurt ✍️</h3>
+<p>Hoe zeg je: 'Hallo, ik heet ... en ik ben Nederlands'?</p>
+<textarea id="writing" placeholder="Schrijf hier je Italiaanse zin..."></textarea>
+<button class="secondary" onclick="checkWriting()">Controleer antwoord</button>
+<p id="writingResult"></p>
+</div>
+</section>
+
+<section id="quiz" class="hidden">
+<div class="card">
+<div class="muted">KENNIS TESTEN</div>
+<h2>Quiz les 1</h2>
+<p id="question"></p>
+<div id="answers"></div>
+<p id="feedback"></p>
+<button id="next" class="primary hidden" onclick="nextQuestion()">Volgende vraag →</button>
+<button id="finish" class="primary hidden" onclick="finishQuiz()">Quiz afronden ✓</button>
+</div>
+</section>
+</main>
+
+<footer>Italiano · Jouw persoonlijke Italiaanse leeromgeving</footer>
+
+<script>
+const sections=['home','lesson','words','talk','quiz'];
+let done=JSON.parse(localStorage.getItem('italianoDone')||'[false,false,false,false]');
+function show(id,btn){
+sections.forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==id));
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+if(btn)btn.classList.add('active');
+if(id==='quiz')renderQuestion();
+}
+function update(){
+let n=done.filter(Boolean).length;
+document.getElementById('bar').style.width=(n/4*100)+'%';
+document.getElementById('progressText').textContent=n+' van 4 onderdelen afgerond';
+localStorage.setItem('italianoDone',JSON.stringify(done));
+}
+function complete(i){
+done[i]=true;
+update();
+alert('Goed gedaan! Onderdeel afgerond. 🇮🇹');
+}
+function checkWriting(){
+let v=document.getElementById('writing').value.toLowerCase().trim();
+let r=document.getElementById('writingResult');
+if(v.includes('mi chiamo')&&v.includes('olandese'))
+r.textContent='Ottimo! Dat is goed gedaan! 🇮🇹';
+else
+r.textContent='Probeer: Ciao, mi chiamo [naam] e sono olandese.';
+}
+const questions=[
+{q:"Wat betekent 'Io sono'?",a:["Ik ben","Jij bent","Wij zijn"],c:0,e:"Io = ik en sono = ben."},
+{q:"Hoe zeg je 'Jij bent'?",a:["Tu siamo","Tu sei","Tu sono"],c:1,e:"Bij tu hoort sei."},
+{q:"Wat betekent 'Grazie'?",a:["Alsjeblieft","Goedemorgen","Bedankt"],c:2,e:"Grazie betekent bedankt."},
+{q:"Hoe zeg je 'Wij zijn'?",a:["Noi siamo","Noi siete","Noi è"],c:0,e:"Bij noi hoort siamo."},
+{q:"Wat betekent 'Sono olandese'?",a:["Ik ben Italiaans","Ik ben Nederlands","Ik ben Engels"],c:1,e:"Olandese betekent Nederlands."}
+];
+let qi=0,score=0,answered=false;
+function renderQuestion(){
+qi=0;score=0;renderOne();
+}
+function renderOne(){
+answered=false;
+document.getElementById('feedback').textContent='';
+document.getElementById('next').classList.add('hidden');
+document.getElementById('finish').classList.add('hidden');
+let q=questions[qi];
+document.getElementById('question').textContent=(qi+1)+' / '+questions.length+' — '+q.q;
+let box=document.getElementById('answers');
+box.innerHTML='';
+q.a.forEach((a,i)=>{
+let b=document.createElement('button');
+b.className='option';
+b.textContent=a;
+b.onclick=()=>answer(i);
+box.appendChild(b);
+});
+}
+function answer(i){
+if(answered)return;
+answered=true;
+let q=questions[qi];
+if(i===q.c){score++;document.getElementById('feedback').textContent='Goed gedaan! ✓ '+q.e;}
+else document.getElementById('feedback').textContent='Nog niet helemaal. '+q.e;
+document.querySelectorAll('.option').forEach(b=>b.disabled=true);
+if(qi<questions.length-1)document.getElementById('next').classList.remove('hidden');
+else document.getElementById('finish').classList.remove('hidden');
+}
+function nextQuestion(){qi++;renderOne();}
+function finishQuiz(){
+done[3]=true;update();
+document.getElementById('question').textContent='Je hebt '+score+' van de '+questions.length+' vragen goed!';
+document.getElementById('answers').innerHTML='';
+document.getElementById('feedback').textContent=score===5?'Fantastico! Alles goed!':'Goed geoefend! Herhaal de les gerust nog eens.';
+document.getElementById('finish').classList.add('hidden');
+}
+update();
+</script>
+</body>
+</html>
