@@ -3,568 +3,1821 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#176b50">
-<title>Italiano – Mijn Italiaanse cursus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiaans leren</title>
 <style>
-:root{--green:#176b50;--light:#eaf5ef;--cream:#faf8f1;--ink:#24352e;--muted:#718078}
-*{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
-header{background:var(--green);color:white;padding:25px 20px 30px;border-radius:0 0 24px 24px}
-header h1{margin:8px 0;font-size:29px}
-header p{margin:0;opacity:.9}
-main{max-width:760px;margin:auto;padding:16px}
-nav{display:flex;gap:8px;overflow-x:auto;margin:15px 0}
-nav button{border:0;border-radius:20px;padding:12px 16px;background:#e5e9e5;white-space:nowrap;cursor:pointer}
-nav button.active{background:var(--green);color:white}
-.card{background:white;border-radius:16px;padding:18px;margin:13px 0;box-shadow:0 3px 12px #00000009}
-h2{font-size:22px;margin-top:5px}
-h3{margin-bottom:8px}
-p{line-height:1.6}
-.muted{color:var(--muted);font-size:14px}
-.big{font-size:23px;font-weight:bold;color:var(--green)}
-.progress{height:11px;background:#e5eae5;border-radius:10px;overflow:hidden}
-.progress div{height:100%;background:#4ba77c;width:0;transition:.3s}
-button.primary{background:var(--green);color:white;border:0;border-radius:11px;padding:13px 17px;font-size:15px;cursor:pointer}
-button.secondary{background:var(--light);color:var(--green);border:0;border-radius:10px;padding:12px;cursor:pointer}
-button:disabled{opacity:.5;cursor:default}
-.lesson{background:white;border-radius:14px;padding:15px;margin:10px 0;display:flex;align-items:center;gap:12px;cursor:pointer;border:1px solid #e8eee9}
-.lesson:hover{border-color:var(--green)}
-.lesson .number{background:var(--light);color:var(--green);border-radius:10px;padding:12px;font-weight:bold}
-.lesson .info{flex:1}
-.lesson .info b{display:block;margin-bottom:4px}
-.done{color:#20845c;font-size:13px}
-.word{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #eee}
-.option{display:block;width:100%;text-align:left;background:#f1f5f1;border:2px solid transparent;border-radius:11px;padding:13px;margin:8px 0;font-size:15px;cursor:pointer}
-.option:hover{border-color:var(--green)}
-.option.correct{border-color:#26966b;background:#eaf5ef}
-.option.wrong{border-color:#d66;background:#fff0f0}
-textarea{width:100%;padding:13px;border:1px solid #d8dfd9;border-radius:10px;font-size:16px;margin:8px 0;min-height:90px}
-.hidden{display:none!important}
-.tag{display:inline-block;background:var(--light);color:var(--green);padding:5px 9px;border-radius:20px;font-size:12px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+:root {
+  --green:#23845b;
+  --dark:#173d30;
+  --light:#edf7f1;
+  --cream:#faf9f5;
+  --red:#c64d4d;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--cream);
+  color:#26352e;
+  line-height:1.6;
+}
+header {
+  background:var(--dark);
+  color:white;
+  padding:25px 18px;
+  text-align:center;
+}
+header h1 { margin:0; font-size:28px; }
+header p { margin:5px 0 0; opacity:.85; }
+.container {
+  max-width:900px;
+  margin:25px auto;
+  padding:0 15px 40px;
+}
+.panel {
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  margin-bottom:18px;
+  box-shadow:0 2px 10px #0000000b;
+}
+h2,h3 { color:var(--dark); }
+button {
+  background:var(--green);
+  color:white;
+  border:0;
+  border-radius:9px;
+  padding:12px 18px;
+  font-size:15px;
+  cursor:pointer;
+  margin:5px 4px 5px 0;
+}
+button:hover { filter:brightness(.92); }
+button:disabled { opacity:.4; cursor:not-allowed; }
+.secondary { background:#65766d; }
+.option {
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#f0f4f1;
+  color:#26352e;
+  border:2px solid transparent;
+  margin:8px 0;
+}
+.option.selected { border-color:var(--green); background:#e3f3e9; }
+.option.correct { background:#d8f2df; border-color:#23845b; }
+.option.wrong { background:#fbe2e2; border-color:var(--red); }
+.progress {
+  height:10px;
+  background:#e5e9e6;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
+}
+.progress div {
+  height:100%;
+  background:var(--green);
+  transition:width .2s;
+}
+.tag {
+  display:inline-block;
+  background:var(--light);
+  color:var(--dark);
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:13px;
+  margin:3px;
+}
+.word-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:9px;
+}
+.word {
+  background:#f4f7f4;
+  padding:10px;
+  border-radius:8px;
+}
+.word strong { color:var(--dark); }
+.example {
+  background:#f0f7f2;
+  border-left:4px solid var(--green);
+  padding:12px 15px;
+  margin:12px 0;
+  border-radius:5px;
+}
+.question {
+  padding:15px 0;
+  border-bottom:1px solid #e8ece9;
+}
+textarea {
+  width:100%;
+  min-height:75px;
+  border:1px solid #cbd5ce;
+  border-radius:8px;
+  padding:10px;
+  font:inherit;
+}
+.small { color:#64736a; font-size:14px; }
+.lesson-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border-bottom:1px solid #edf0ed;
+}
+.lesson-item button { flex-shrink:0; }
+.hidden { display:none !important; }
+#feedback { font-weight:bold; margin-top:12px; }
+footer { text-align:center; color:#78847c; padding:20px; }
+@media(max-width:550px) {
+  .panel { padding:16px; }
+  header h1 { font-size:23px; }
+  .lesson-item { align-items:flex-start; }
+}
 </style>
 </head>
 <body>
+
 <header>
-<small>JOUW PERSOONLIJKE ITALIAANSE CURSUS</small>
-<h1>🇮🇹 Italiano</h1>
-<p>Leer Italiaans, stap voor stap.</p>
+  <h1>🇮🇹 Italiaans leren</h1>
+  <p>Jouw persoonlijke cursus Italiaans – van beginner tot zelfstandig gesprek</p>
 </header>
 
-<main>
-<div class="card">
-<div class="muted">JOUW CURSUSVOORTGANG</div>
-<h2 id="progressTitle">0 van 25 lessen afgerond</h2>
-<div class="progress"><div id="bar"></div></div>
-<p class="muted" id="progressSub">Elke dag 10 minuten Italiaans!</p>
+<div class="container">
+  <section id="home" class="panel">
+    <h2>Benvenuto!</h2>
+    <p>Welkom bij jouw Italiaanse cursus. Iedere les duurt ongeveer 5 tot 10 minuten en bestaat uit uitleg, nieuwe woorden, voorbeelden en oefeningen.</p>
+    <div class="tag">25 lessen</div>
+    <div class="tag">Beginnersniveau</div>
+    <div class="tag">Grammatica en spreken</div>
+    <div class="tag">Schrijfopdrachten</div>
+    <div class="progress"><div id="overallProgress" style="width:0%"></div></div>
+    <p id="progressText" class="small">0 van 25 lessen afgerond</p>
+    <button onclick="showLessons()">Bekijk mijn lessen</button>
+  </section>
+
+  <section id="lessonList" class="panel hidden">
+    <h2>Mijn lessen</h2>
+    <p class="small">Je moet een les met meer dan 80% afronden om de volgende les vrij te spelen.</p>
+    <div id="lessons"></div>
+    <button class="secondary" onclick="goHome()">Terug</button>
+  </section>
+
+  <section id="lessonView" class="hidden">
+    <div class="panel">
+      <button class="secondary" onclick="showLessons()">← Terug naar lessen</button>
+      <div id="lessonContent"></div>
+    </div>
+  </section>
 </div>
 
-<nav>
-<button class="active" onclick="showPage('home',this)">Start</button>
-<button onclick="showPage('course',this)">Alle lessen</button>
-<button onclick="showPage('progress',this)">Voortgang</button>
-</nav>
-
-<section id="home">
-<div class="card">
-<h2>Benvenuto! 👋</h2>
-<p>Welkom bij jouw persoonlijke Italiaanse cursus. Je begint bij de basis en werkt toe naar zelfstandig communiceren in alledaagse situaties.</p>
-<span class="tag">Beginner tot A2</span>
-<span class="tag">25 lessen</span>
-<span class="tag">10 minuten per dag</span>
-<br><br>
-<button class="primary" onclick="openLesson(0)">Start / vervolg cursus →</button>
-</div>
-<div class="card">
-<h3>Wat ga je leren?</h3>
-<p>📘 Italiaanse grammatica en zinsopbouw</p>
-<p>🗣️ Gesprekken voeren</p>
-<p>✍️ Zelf Italiaanse zinnen schrijven</p>
-<p>🧠 Woorden leren en herhalen</p>
-<p>🏁 Een eindtoets na les 25</p>
-</div>
-<div class="card">
-<h3>Hoe werkt de cursus?</h3>
-<p>Iedere les bevat uitleg, voorbeelden, een meerkeuzequiz en een schrijfopdracht. Je kunt lessen opnieuw bekijken en je voortgang wordt op dit apparaat opgeslagen.</p>
-</div>
-</section>
-
-<section id="course" class="hidden">
-<div class="card">
-<h2>Jouw 25 lessen</h2>
-<p class="muted">Kies een les om te beginnen. Je kunt lessen in je eigen tempo volgen.</p>
-<div id="lessonList"></div>
-</div>
-</section>
-
-<section id="progress" class="hidden">
-<div class="card">
-<h2>Jouw voortgang</h2>
-<p id="progressDetail"></p>
-<div class="progress"><div id="bar2"></div></div>
-<h3 style="margin-top:22px">Afgeronde lessen</h3>
-<div id="doneList"></div>
-<button class="secondary" onclick="resetProgress()">Voortgang opnieuw instellen</button>
-</div>
-</section>
-
-<section id="lessonPage" class="hidden">
-<div class="card">
-<button class="secondary" onclick="showPage('course',document.querySelectorAll('nav button')[1])">← Terug naar lessen</button>
-<p class="muted" id="lessonNumber"></p>
-<h2 id="lessonTitle"></h2>
-<span class="tag">Ongeveer 10 minuten</span>
-<div id="lessonContent"></div>
-</div>
-<div class="card">
-<h3>🧠 Controleer wat je hebt geleerd</h3>
-<p id="question"></p>
-<div id="answers"></div>
-<p id="feedback"></p>
-<button id="nextQuestion" class="primary hidden" onclick="showWriting()">Verder naar schrijfopdracht →</button>
-</div>
-<div id="writingCard" class="card hidden">
-<h3>✍️ Zelf aan de slag</h3>
-<p id="writingPrompt"></p>
-<textarea id="writingAnswer" placeholder="Schrijf hier jouw Italiaanse antwoord..."></textarea>
-<button class="secondary" onclick="showExample()">Toon voorbeeldantwoord</button>
-<p id="example" class="hidden"></p>
-<p class="muted">Vergelijk je antwoord met het voorbeeld. Je schrijfopdracht wordt niet automatisch beoordeeld.</p>
-<button class="primary" onclick="finishLesson()">Les afronden ✓</button>
-</div>
-</section>
-</main>
-
-<footer>Italiano · Jouw persoonlijke Italiaanse leeromgeving</footer>
+<footer>Buon lavoro! Veel succes met Italiaans leren.</footer>
 
 <script>
 const lessons = [
+
 {
 title:"Jezelf voorstellen – ESSERE",
-topic:"Persoonlijke voornaamwoorden en het werkwoord zijn.",
-content:`<h3>Persoonlijke voornaamwoorden</h3>
-<div class="word"><span>Io</span><b>Ik</b></div><div class="word"><span>Tu</span><b>Jij</b></div><div class="word"><span>Lui / Lei</span><b>Hij / zij</b></div><div class="word"><span>Noi</span><b>Wij</b></div><div class="word"><span>Voi</span><b>Jullie</b></div><div class="word"><span>Loro</span><b>Zij</b></div>
-<h3>Het werkwoord essere (zijn)</h3>
-<div class="word"><span>Io sono</span><b>Ik ben</b></div><div class="word"><span>Tu sei</span><b>Jij bent</b></div><div class="word"><span>Lui/Lei è</span><b>Hij/zij is</b></div><div class="word"><span>Noi siamo</span><b>Wij zijn</b></div><div class="word"><span>Voi siete</span><b>Jullie zijn</b></div><div class="word"><span>Loro sono</span><b>Zij zijn</b></div>
-<p>Voorbeeld: <b>Sono olandese.</b> betekent 'Ik ben Nederlands'. Je laat het woord io vaak weg.</p>`,
-q:"Wat betekent 'Io sono'?",a:["Ik ben","Ik heb","Ik ga"],c:0,e:"Sono is de vervoeging van essere bij io.",
-prompt:"Vertaal: Ik ben Nederlands en jij bent Italiaans.",example:"Sono olandese e tu sei italiano."
+topic:"Het werkwoord essere (zijn)",
+intro:"In deze eerste les leer je jezelf voorstellen in het Italiaans. Je leert hoe je zegt wie je bent, waar je vandaan komt en hoe je iemand begroet.",
+explanation:[
+["Het werkwoord essere","Essere betekent zijn. Dit is een belangrijk en onregelmatig werkwoord. Je gebruikt het bijvoorbeeld om te vertellen wie je bent."],
+["De vervoeging","Io sono = ik ben. Tu sei = jij bent. Lui/lei è = hij/zij is. Noi siamo = wij zijn. Voi siete = jullie zijn. Loro sono = zij zijn."],
+["Persoonlijke voornaamwoorden","Io betekent ik, tu betekent jij, lui betekent hij en lei betekent zij. In het Italiaans laat men het voornaamwoord vaak weg, omdat de werkwoordsvorm al duidelijk maakt over wie je praat."],
+["Begroeten","Ciao is een informele begroeting. Buongiorno betekent goedemorgen of goedendag. Buonasera gebruik je in de avond. Arrivederci betekent tot ziens."]
+],
+words:[
+["Ciao","Hallo / doei"],
+["Buongiorno","Goedemorgen"],
+["Buonasera","Goedenavond"],
+["Arrivederci","Tot ziens"],
+["Io","Ik"],
+["Tu","Jij"],
+["Sono","Ik ben"],
+["Sei","Jij bent"],
+["Italiano","Italiaans (mannelijk)"],
+["Olandese","Nederlands(e)"],
+["Piacere","Aangenaam"],
+["Come","Hoe"]
+],
+examples:[
+["Ciao, sono Marco.","Hallo, ik ben Marco."],
+["Io sono olandese.","Ik ben Nederlands."],
+["Tu sei italiano?","Ben jij Italiaans?"],
+["Buongiorno, mi chiamo Anna.","Goedendag, ik heet Anna."],
+["Piacere!","Aangenaam!"]
+],
+tip:"In het Italiaans kun je vaak 'io' weglaten. 'Sono olandese' betekent dus ook gewoon 'Ik ben Nederlands'.",
+questions:[
+{q:"Wat betekent 'sono'?",a:["Jij bent","Ik ben","Hij is","Wij zijn"],c:1},
+{q:"Hoe zeg je 'jij bent'?",a:["Io sono","Tu sei","Lui è","Noi siamo"],c:1},
+{q:"Wat betekent 'buongiorno'?",a:["Goedenavond","Tot ziens","Goedemorgen","Aangenaam"],c:2},
+{q:"Welke vorm hoort bij 'noi'?",a:["Siamo","Siete","Sono","Sei"],c:0},
+{q:"Hoe zeg je 'Ik ben Nederlands'?",a:["Sono olandese","Sei italiano","Tu sono","Io è olandese"],c:0},
+{q:"Wat betekent 'piacere'?",a:["Alsjeblieft","Aangenaam","Dank je","Tot morgen"],c:1}
+],
+writing:[
+{prompt:"Schrijf in het Italiaans: Hallo, ik ben [jouw naam].",sample:"Ciao, sono [naam]."},
+{prompt:"Schrijf in het Italiaans: Ik ben Nederlands.",sample:"Sono olandese."}
+]
 },
+
 {
 title:"Hebben – AVERE",
-topic:"Het werkwoord avere en leeftijd aangeven.",
-content:`<h3>Het werkwoord avere (hebben)</h3>
-<div class="word"><span>Io ho</span><b>Ik heb</b></div><div class="word"><span>Tu hai</span><b>Jij hebt</b></div><div class="word"><span>Lui/Lei ha</span><b>Hij/zij heeft</b></div><div class="word"><span>Noi abbiamo</span><b>Wij hebben</b></div><div class="word"><span>Voi avete</span><b>Jullie hebben</b></div><div class="word"><span>Loro hanno</span><b>Zij hebben</b></div>
-<p>De H spreek je niet uit.</p><h3>Vaste uitdrukkingen</h3>
-<p><b>Ho fame</b> – Ik heb honger.</p><p><b>Ho sete</b> – Ik heb dorst.</p><p><b>Ho sonno</b> – Ik ben slaperig.</p>
-<p>Leeftijd geef je ook aan met avere: <b>Ho vent'anni</b> = Ik ben twintig jaar oud.</p>`,
-q:"Hoe zeg je 'Ik heb honger'?",a:["Sono fame","Ho fame","Hai fame"],c:1,e:"Ho fame betekent letterlijk: ik heb honger.",
-prompt:"Vertaal: Ik heb een hond en ik heb dorst.",example:"Ho un cane e ho sete."
+topic:"Het werkwoord avere (hebben)",
+intro:"In deze les leer je het werkwoord avere. Dit betekent hebben. Je gebruikt het om te vertellen wat je hebt en om je leeftijd aan te geven.",
+explanation:[
+["De vervoeging van avere","Io ho = ik heb. Tu hai = jij hebt. Lui/lei ha = hij/zij heeft. Noi abbiamo = wij hebben. Voi avete = jullie hebben. Loro hanno = zij hebben."],
+["Leeftijd aangeven","In het Italiaans zeg je letterlijk dat je een bepaald aantal jaren hebt. 'Ho venti anni' betekent dus: ik ben twintig jaar oud."],
+["Essere of avere?","Essere betekent zijn en avere betekent hebben. Let goed op welk werkwoord je nodig hebt. 'Sono Marco' is ik ben Marco. 'Ho un libro' is ik heb een boek."],
+["Veelgebruikte combinaties","Ho fame betekent ik heb honger. Ho sete betekent ik heb dorst. Ho sonno betekent ik ben slaperig. Het Italiaanse taalgebruik verschilt hier dus van het Nederlands."]
+],
+words:[
+["Ho","Ik heb"],
+["Hai","Jij hebt"],
+["Ha","Hij/zij heeft"],
+["Abbiamo","Wij hebben"],
+["Avete","Jullie hebben"],
+["Hanno","Zij hebben"],
+["Anni","Jaren"],
+["Libro","Boek"],
+["Casa","Huis"],
+["Fame","Honger"],
+["Sete","Dorst"],
+["Sonno","Slaap"],
+["Un","Een (mannelijk)"],
+["Una","Een (vrouwelijk)"]
+],
+examples:[
+["Ho venti anni.","Ik ben twintig jaar oud."],
+["Hai un libro.","Jij hebt een boek."],
+["Abbiamo una casa.","Wij hebben een huis."],
+["Ho fame.","Ik heb honger."],
+["Lei ha sete.","Zij heeft dorst."]
+],
+tip:"Gebruik 'avere' voor leeftijd. Dus niet 'sono venti anni', maar 'ho venti anni'.",
+questions:[
+{q:"Wat betekent 'ho'?",a:["Ik ben","Ik heb","Jij hebt","Hij heeft"],c:1},
+{q:"Hoe zeg je 'jij hebt'?",a:["Hai","Ho","Ha","Hanno"],c:0},
+{q:"Wat betekent 'ho fame'?",a:["Ik heb dorst","Ik ben moe","Ik heb honger","Ik ben thuis"],c:2},
+{q:"Welke vorm hoort bij 'noi'?",a:["Avete","Hanno","Ha","Abbiamo"],c:3},
+{q:"Hoe zeg je 'Ik ben twintig jaar oud'?",a:["Sono venti anni","Ho venti anni","Hai venti anni","È venti anni"],c:1},
+{q:"Wat betekent 'libro'?",a:["Huis","Boek","Water","Jaar"],c:1}
+],
+writing:[
+{prompt:"Schrijf in het Italiaans: Ik heb een boek.",sample:"Ho un libro."},
+{prompt:"Schrijf in het Italiaans: Ik ben twintig jaar oud. Vervang twintig eventueel door je eigen leeftijd.",sample:"Ho venti anni."}
+]
 },
+
 {
 title:"Regelmatige werkwoorden",
-topic:"Werkwoorden op -ARE, -ERE en -IRE.",
-content:`<h3>De drie groepen</h3>
-<p>Italiaanse werkwoorden eindigen vaak op -are, -ere of -ire. Haal de uitgang weg en voeg de juiste uitgang toe.</p>
-<h3>Parlare – praten</h3>
-<p>Io parlo · Tu parli · Lui parla · Noi parliamo · Voi parlate · Loro parlano.</p>
-<h3>Prendere – nemen</h3>
-<p>Io prendo · Tu prendi · Lui prende · Noi prendiamo · Voi prendete · Loro prendono.</p>
-<h3>Dormire – slapen</h3>
-<p>Io dormo · Tu dormi · Lui dorme · Noi dormiamo · Voi dormite · Loro dormono.</p>
-<p>Voorbeeld: <b>Io mangio una pizza.</b> – Ik eet een pizza.</p>`,
-q:"Hoe zeg je 'Jij praat'?",a:["Tu parlo","Tu parli","Tu parlano"],c:1,e:"Bij tu hoort de uitgang -i.",
-prompt:"Vertaal: Ik eet een pizza en wij werken vandaag.",example:"Io mangio una pizza e noi lavoriamo oggi."
+topic:"Werkwoorden op -are, -ere en -ire",
+intro:"Je leert in deze les hoe regelmatige Italiaanse werkwoorden veranderen afhankelijk van wie iets doet. Daarmee kun je steeds meer eigen zinnen maken.",
+explanation:[
+["De drie groepen","Italiaanse werkwoorden eindigen in de infinitief vaak op -are, -ere of -ire. Bijvoorbeeld parlare (spreken), vedere (zien) en dormire (slapen)."],
+["Werkwoorden op -are","Haal -are weg en voeg de juiste uitgang toe. Parlare wordt: io parlo, tu parli, lui/lei parla, noi parliamo, voi parlate, loro parlano."],
+["Werkwoorden op -ere","Bij vedere krijg je: io vedo, tu vedi, lui/lei vede, noi vediamo, voi vedete, loro vedono."],
+["Werkwoorden op -ire","Bij dormire krijg je: io dormo, tu dormi, lui/lei dorme, noi dormiamo, voi dormite, loro dormono."],
+["Een zin maken","Het werkwoord past zich aan de persoon aan. 'Io parlo italiano' betekent ik spreek Italiaans. 'Tu parli italiano' betekent jij spreekt Italiaans."]
+],
+words:[
+["Parlare","Spreken"],
+["Vedere","Zien"],
+["Dormire","Slapen"],
+["Mangiare","Eten"],
+["Abitare","Wonen"],
+["Lavorare","Werken"],
+["Io parlo","Ik spreek"],
+["Tu parli","Jij spreekt"],
+["Io vedo","Ik zie"],
+["Tu vedi","Jij ziet"],
+["Io dormo","Ik slaap"],
+["Tu dormi","Jij slaapt"],
+["Italiano","Italiaans"],
+["Molto","Veel"]
+],
+examples:[
+["Io parlo italiano.","Ik spreek Italiaans."],
+["Tu parli molto.","Jij praat veel."],
+["Io vedo una casa.","Ik zie een huis."],
+["Tu dormi.","Jij slaapt."],
+["Noi lavoriamo.","Wij werken."]
+],
+tip:"Leer werkwoorden altijd samen met de uitgangen. Als je eenmaal het patroon kent, kun je veel nieuwe werkwoorden zelf vervoegen.",
+questions:[
+{q:"Wat is de infinitief van 'parlo'?",a:["Parlare","Parli","Parla","Parlato"],c:0},
+{q:"Hoe zeg je 'jij spreekt'?",a:["Io parlo","Tu parli","Tu parla","Noi parliamo"],c:1},
+{q:"Welke uitgang hoort bij 'noi' bij parlare?",a:["-ate","-ano","-iamo","-i"],c:2},
+{q:"Wat betekent 'vedere'?",a:["Slapen","Werken","Eten","Zien"],c:3},
+{q:"Hoe zeg je 'ik slaap'?",a:["Io dormo","Tu dormi","Io dorme","Noi dormiamo"],c:0},
+{q:"Wat betekent 'lavorare'?",a:["Wonen","Werken","Spreken","Zien"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik spreek Italiaans.",sample:"Io parlo italiano."},
+{prompt:"Vertaal naar het Italiaans: Jij slaapt.",sample:"Tu dormi."}
+]
 },
+
 {
 title:"Lidwoorden – IL, LA, UN, UNA",
-topic:"Bepaalde en onbepaalde lidwoorden.",
-content:`<h3>Bepaalde lidwoorden</h3>
-<p>Il libro – het boek (mannelijk).</p><p>La casa – het huis (vrouwelijk).</p><p>L'amico – de vriend.</p><p>Lo studente – de student.</p>
-<h3>Onbepaalde lidwoorden</h3>
-<p>Un libro – een boek.</p><p>Una casa – een huis.</p><p>Un'amica – een vriendin.</p><p>Uno studente – een student.</p>
-<p>Het lidwoord hangt af van het geslacht en de beginletter van het zelfstandig naamwoord.</p>`,
-q:"Welk lidwoord hoort bij 'casa'?",a:["Il","La","Lo"],c:1,e:"Casa is vrouwelijk: la casa.",
-prompt:"Vertaal: Het boek en een huis.",example:"Il libro e una casa."
+topic:"Mannelijke en vrouwelijke zelfstandige naamwoorden",
+intro:"In deze les leer je hoe je in het Italiaans 'de' en 'een' gebruikt. Je leert het verschil tussen mannelijke en vrouwelijke woorden en oefent met korte zinnen.",
+explanation:[
+["Mannelijke woorden","Veel mannelijke zelfstandige naamwoorden eindigen op -o. Bijvoorbeeld libro (boek) en ragazzo (jongen). Het bepaalde lidwoord is meestal il."],
+["Vrouwelijke woorden","Veel vrouwelijke zelfstandige naamwoorden eindigen op -a. Bijvoorbeeld casa (huis) en ragazza (meisje). Het bepaalde lidwoord is meestal la."],
+["Het onbepaalde lidwoord","Voor een mannelijk woord gebruik je meestal un. Voor een vrouwelijk woord gebruik je una. Bijvoorbeeld un libro en una casa."],
+["Let op uitzonderingen","Niet ieder woord volgt de standaardregel. Een mannelijk woord kan bijvoorbeeld op -e eindigen. Leer nieuwe woorden daarom liefst samen met hun lidwoord."],
+["Voorbeelden in zinnen","Il libro betekent het boek. La casa betekent het huis. Ho un libro betekent ik heb een boek. Ho una casa betekent ik heb een huis."]
+],
+words:[
+["Il","De / het (mannelijk)"],
+["La","De / het (vrouwelijk)"],
+["Un","Een (mannelijk)"],
+["Una","Een (vrouwelijk)"],
+["Libro","Boek"],
+["Ragazzo","Jongen"],
+["Ragazza","Meisje"],
+["Casa","Huis"],
+["Tavolo","Tafel"],
+["Sedia","Stoel"],
+["Porta","Deur"],
+["Finestra","Raam"]
+],
+examples:[
+["Il libro è qui.","Het boek is hier."],
+["La casa è grande.","Het huis is groot."],
+["Ho un libro.","Ik heb een boek."],
+["Ho una casa.","Ik heb een huis."],
+["Il ragazzo è italiano.","De jongen is Italiaans."],
+["La ragazza è italiana.","Het meisje is Italiaans."]
+],
+tip:"Een handige eerste regel: woorden op -o zijn vaak mannelijk en woorden op -a vaak vrouwelijk. Het is geen regel zonder uitzonderingen, maar wel een goed begin.",
+questions:[
+{q:"Welk lidwoord gebruik je meestal bij een mannelijk woord?",a:["La","Una","Il","Le"],c:2},
+{q:"Welk lidwoord hoort bij 'casa'?",a:["Il","La","Un","I"],c:1},
+{q:"Hoe zeg je 'een boek'?",a:["Una libro","Un libro","Il una","La libro"],c:1},
+{q:"Wat betekent 'ragazza'?",a:["Jongen","Huis","Meisje","Tafel"],c:2},
+{q:"Hoe zeg je 'een huis'?",a:["Un casa","Una casa","Il casa","La un"],c:1},
+{q:"Wat betekent 'la porta'?",a:["De stoel","Het boek","De deur","Het raam"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik heb een boek.",sample:"Ho un libro."},
+{prompt:"Vertaal naar het Italiaans: Het huis.",sample:"La casa."}
+]
 },
+
 {
 title:"Meervoud van zelfstandige naamwoorden",
-topic:"Woorden van enkelvoud naar meervoud veranderen.",
-content:`<h3>De belangrijkste regels</h3>
-<p>Mannelijke woorden op -o veranderen meestal in -i.</p><p>Libro → libri (boeken).</p>
-<p>Vrouwelijke woorden op -a veranderen meestal in -e.</p><p>Casa → case (huizen).</p>
-<p>Woorden op -e veranderen meestal in -i.</p><p>Studente → studenti (studenten).</p>
-<h3>Voorbeelden</h3><p>Un ragazzo → due ragazzi.</p><p>Una ragazza → due ragazze.</p>
-<p>Let op: er zijn uitzonderingen, maar deze basisregels helpen je al heel ver.</p>`,
-q:"Wat is het meervoud van 'casa'?",a:["Casi","Case","Casi"],c:1,e:"Casa verandert van -a naar -e.",
-prompt:"Vertaal: Twee boeken en drie huizen.",example:"Due libri e tre case."
+topic:"Van één naar meerdere personen en dingen",
+intro:"In deze les leer je hoe je Italiaanse zelfstandige naamwoorden in het meervoud zet. Je leert ook welke lidwoorden je gebruikt wanneer je over meerdere dingen praat.",
+explanation:[
+["Woorden op -o","Een mannelijk woord dat eindigt op -o verandert meestal in -i. Libro wordt libri. Ragazzo wordt ragazzi."],
+["Woorden op -a","Een vrouwelijk woord dat eindigt op -a verandert meestal in -e. Casa wordt case. Ragazza wordt ragazze."],
+["Woorden op -e","Woorden die eindigen op -e veranderen meestal in -i. Cane wordt cani. In deze les gebruiken we vooral de woorden die je al kent."],
+["Lidwoorden in het meervoud","Il wordt meestal i en la wordt le. Dus il libro wordt i libri en la casa wordt le case."],
+["Zinnen maken","Je kunt nu vertellen dat je meerdere dingen hebt. Ho un libro betekent ik heb een boek. Ho due libri betekent ik heb twee boeken."]
+],
+words:[
+["Libro","Boek"],
+["Libri","Boeken"],
+["Casa","Huis"],
+["Case","Huizen"],
+["Ragazzo","Jongen"],
+["Ragazzi","Jongens"],
+["Ragazza","Meisje"],
+["Ragazze","Meisjes"],
+["Il","De / het (enkelvoud mannelijk)"],
+["I","De (meervoud mannelijk)"],
+["La","De (enkelvoud vrouwelijk)"],
+["Le","De (meervoud vrouwelijk)"],
+["Due","Twee"],
+["Tre","Drie"]
+],
+examples:[
+["Il libro.","Het boek."],
+["I libri.","De boeken."],
+["La casa.","Het huis."],
+["Le case.","De huizen."],
+["Ho due libri.","Ik heb twee boeken."],
+["Ho tre case.","Ik heb drie huizen."]
+],
+tip:"Onthoud vooral: -o wordt meestal -i en -a wordt meestal -e. Het lidwoord verandert mee.",
+questions:[
+{q:"Wat is het meervoud van 'libro'?",a:["Libra","Libri","Libroe","Libros"],c:1},
+{q:"Wat is het meervoud van 'casa'?",a:["Case","Casi","Casae","Casas"],c:0},
+{q:"Welk lidwoord hoort bij 'libri'?",a:["La","Il","I","Le"],c:2},
+{q:"Hoe zeg je 'de huizen'?",a:["La casa","I case","Le case","Il case"],c:2},
+{q:"Wat betekent 'ragazzi'?",a:["Meisjes","Jongens","Boeken","Huizen"],c:1},
+{q:"Hoe zeg je 'twee boeken'?",a:["Due libri","Due libro","Due case","Tre libri"],c:0}
+],
+writing:[
+{prompt:"Maak het meervoud: il libro.",sample:"I libri."},
+{prompt:"Vertaal naar het Italiaans: Ik heb twee boeken.",sample:"Ho due libri."}
+]
 },
+
 {
 title:"Bijvoeglijke naamwoorden en kleuren",
-topic:"Eigenschappen en kleuren beschrijven.",
-content:`<h3>Bijvoeglijke naamwoorden</h3>
-<p>Een bijvoeglijk naamwoord past zich vaak aan het geslacht en aantal aan.</p>
-<p>Ragazzo alto – lange jongen.</p><p>Ragazza alta – lang meisje.</p><p>Ragazzi alti – lange jongens.</p><p>Ragazze alte – lange meisjes.</p>
-<h3>Kleuren</h3><p>Rosso – rood · Blu – blauw · Verde – groen · Giallo – geel · Nero – zwart · Bianco – wit.</p>
-<p>Voorbeeld: <b>Una macchina rossa.</b> – Een rode auto.</p>`,
-q:"Hoe zeg je 'een rode auto'?",a:["Una macchina rosso","Una macchina rossa","Un macchina rossi"],c:1,e:"Macchina is vrouwelijk, dus rossa.",
-prompt:"Vertaal: Het huis is wit en de auto is rood.",example:"La casa è bianca e la macchina è rossa."
+topic:"Dingen en mensen beschrijven",
+intro:"Je leert in deze les hoe je personen en voorwerpen beschrijft. Je maakt kennis met veelgebruikte bijvoeglijke naamwoorden en kleuren.",
+explanation:[
+["Wat is een bijvoeglijk naamwoord?","Een bijvoeglijk naamwoord vertelt iets over een zelfstandig naamwoord. Bijvoorbeeld groot, klein, mooi of oud."],
+["Mannelijk en vrouwelijk","Veel bijvoeglijke naamwoorden veranderen mee met het woord dat ze beschrijven. Grande betekent groot en blijft bij mannelijk en vrouwelijk hetzelfde. Bello verandert bijvoorbeeld in bella."],
+["Enkelvoud en meervoud","Bij veel woorden verandert de uitgang ook in het meervoud. Rosso wordt rossi bij een mannelijk meervoud. Rossa wordt rosse bij een vrouwelijk meervoud."],
+["Kleuren","Rosso betekent rood, blu betekent blauw, verde betekent groen, nero betekent zwart en bianco betekent wit."],
+["De volgorde","In het Italiaans staat het bijvoeglijk naamwoord vaak achter het zelfstandig naamwoord. Una casa grande betekent een groot huis."]
+],
+words:[
+["Grande","Groot"],
+["Piccolo","Klein (mannelijk)"],
+["Piccola","Klein (vrouwelijk)"],
+["Bello","Mooi (mannelijk)"],
+["Bella","Mooi (vrouwelijk)"],
+["Nuovo","Nieuw (mannelijk)"],
+["Nuova","Nieuw (vrouwelijk)"],
+["Rosso","Rood"],
+["Blu","Blauw"],
+["Verde","Groen"],
+["Nero","Zwart"],
+["Bianco","Wit"],
+["Casa","Huis"],
+["Libro","Boek"]
+],
+examples:[
+["Una casa grande.","Een groot huis."],
+["Un libro nuovo.","Een nieuw boek."],
+["Una casa bella.","Een mooi huis."],
+["Il libro è rosso.","Het boek is rood."],
+["La casa è bianca.","Het huis is wit."],
+["Il libro è piccolo.","Het boek is klein."]
+],
+tip:"Let goed op of je een mannelijk of vrouwelijk woord beschrijft. Bij veel bijvoeglijke naamwoorden moet de uitgang daarop worden aangepast.",
+questions:[
+{q:"Wat betekent 'grande'?",a:["Klein","Groot","Nieuw","Rood"],c:1},
+{q:"Wat betekent 'rosso'?",a:["Blauw","Groen","Rood","Wit"],c:2},
+{q:"Welke vorm past bij 'una casa'?",a:["Piccolo","Piccola","Piccoli","Piccole"],c:1},
+{q:"Wat betekent 'nuovo'?",a:["Nieuw","Mooi","Zwart","Groot"],c:0},
+{q:"Hoe zeg je 'een groot huis'?",a:["Una casa grande","Un grande case","Una grande libri","Il casa grande"],c:0},
+{q:"Wat betekent 'verde'?",a:["Zwart","Wit","Rood","Groen"],c:3}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Een groot huis.",sample:"Una casa grande."},
+{prompt:"Vertaal naar het Italiaans: Het boek is rood.",sample:"Il libro è rosso."}
+]
 },
+
 {
 title:"Vragen stellen en ontkennen",
-topic:"Vraagwoorden en het woord non.",
-content:`<h3>Handige vraagwoorden</h3>
-<p>Chi? – Wie?</p><p>Che cosa? – Wat?</p><p>Dove? – Waar?</p><p>Quando? – Wanneer?</p><p>Perché? – Waarom?</p><p>Come? – Hoe?</p><p>Quanto? – Hoeveel?</p>
-<h3>Ontkennen</h3><p>Zet <b>non</b> voor het werkwoord.</p>
-<p>Parlo italiano. – Ik spreek Italiaans.</p><p>Non parlo italiano. – Ik spreek geen Italiaans.</p>
-<p>Dove abiti? – Waar woon je?</p>`,
-q:"Wat betekent 'Dove abiti?'",a:["Hoe heet je?","Waar woon je?","Waar werk je?"],c:1,e:"Dove betekent waar en abiti betekent je woont.",
-prompt:"Vertaal: Waar woon je? Ik woon in Nederland.",example:"Dove abiti? Abito nei Paesi Bassi."
+topic:"Italiaanse vragen en het woord non",
+intro:"Je kunt inmiddels eenvoudige Italiaanse zinnen maken. In deze les leer je hoe je daarvan een vraag maakt en hoe je iets ontkent.",
+explanation:[
+["Een vraag maken","In het Italiaans kun je vaak een vraag maken door je stem aan het einde omhoog te laten gaan. De woordvolgorde blijft meestal hetzelfde. Tu sei italiano betekent jij bent Italiaans. Tu sei italiano? betekent ben jij Italiaans?"],
+["Het woord non","Non betekent niet. Je zet non vóór het werkwoord. Sono italiano betekent ik ben Italiaans. Non sono italiano betekent ik ben niet Italiaans."],
+["Veelgebruikte vraagwoorden","Come betekent hoe. Dove betekent waar. Chi betekent wie. Che cosa betekent wat. Met deze woorden kun je veel vragen stellen."],
+["Korte antwoorden","Sì betekent ja en no betekent nee. Puoi antwoorden met Sì, sono italiano of No, non sono italiano."],
+["Een gesprek","Je kunt nu bijvoorbeeld vragen: Come ti chiami? (Hoe heet je?) en Dove abiti? (Waar woon je?). In deze les oefenen we vooral met de vraagvorm en ontkenning."]
+],
+words:[
+["Non","Niet"],
+["Sì","Ja"],
+["No","Nee"],
+["Come","Hoe"],
+["Dove","Waar"],
+["Chi","Wie"],
+["Che cosa","Wat"],
+["Sei","Jij bent"],
+["Sono","Ik ben"],
+["Abiti","Jij woont"],
+["Parli","Jij spreekt"],
+["Italiano","Italiaans (mannelijk)"],
+["Olandese","Nederlands(e)"],
+["Casa","Huis"]
+],
+examples:[
+["Sei italiano?","Ben jij Italiaans?"],
+["Sì, sono italiano.","Ja, ik ben Italiaans."],
+["No, non sono italiano.","Nee, ik ben niet Italiaans."],
+["Come ti chiami?","Hoe heet je?"],
+["Dove abiti?","Waar woon je?"],
+["Non parlo italiano.","Ik spreek geen Italiaans."]
+],
+tip:"Onthoud: non staat vóór het werkwoord. Dus non sono, non ho en non parlo.",
+questions:[
+{q:"Wat betekent 'non'?",a:["Ja","Nee","Niet","Waar"],c:2},
+{q:"Hoe zeg je 'Ik ben niet Italiaans'?",a:["Sono italiano","Non sono italiano","Non sei italiano","Sono non italiano"],c:1},
+{q:"Wat betekent 'dove'?",a:["Hoe","Wie","Wat","Waar"],c:3},
+{q:"Hoe zeg je 'Ben jij Italiaans?'?",a:["Tu sei italiano?","Io sono italiano.","Non sono italiano.","Dove italiano?"],c:0},
+{q:"Wat betekent 'sì'?",a:["Nee","Ja","Niet","Wie"],c:1},
+{q:"Waar staat 'non' in een ontkennende zin?",a:["Na het werkwoord","Helemaal achteraan","Vóór het werkwoord","Altijd vooraan zonder werkwoord"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik spreek geen Italiaans.",sample:"Non parlo italiano."},
+{prompt:"Maak een vraag in het Italiaans: Ben jij Nederlands?",sample:"Sei olandese?"}
+]
 },
+
 {
 title:"Getallen, dagen en maanden",
-topic:"Tellen en praten over tijd.",
-content:`<h3>Getallen 1 tot 10</h3>
-<p>Uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci.</p>
-<h3>Dagen van de week</h3>
-<p>Lunedì – maandag · Martedì – dinsdag · Mercoledì – woensdag · Giovedì – donderdag · Venerdì – vrijdag · Sabato – zaterdag · Domenica – zondag.</p>
-<h3>Maanden</h3>
-<p>Gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre.</p>
-<p><b>Oggi è lunedì.</b> – Vandaag is het maandag.</p>`,
-q:"Wat betekent 'mercoledì'?",a:["Maandag","Woensdag","Vrijdag"],c:1,e:"Mercoledì betekent woensdag.",
-prompt:"Vertaal: Vandaag is het maandag. Morgen is het dinsdag.",example:"Oggi è lunedì. Domani è martedì."
+topic:"Tellen en praten over tijd",
+intro:"In deze les leer je de belangrijkste getallen, dagen van de week en maanden van het jaar. Hiermee kun je bijvoorbeeld je leeftijd noemen en vertellen wanneer iets gebeurt.",
+explanation:[
+["Getallen van nul tot tien","Zero = 0, uno = 1, due = 2, tre = 3, quattro = 4, cinque = 5, sei = 6, sette = 7, otto = 8, nove = 9 en dieci = 10."],
+["Getallen van elf tot twintig","Undici = 11, dodici = 12, tredici = 13, quattordici = 14, quindici = 15, sedici = 16, diciassette = 17, diciotto = 18, diciannove = 19 en venti = 20."],
+["De dagen van de week","Lunedì is maandag, martedì dinsdag, mercoledì woensdag, giovedì donderdag, venerdì vrijdag, sabato zaterdag en domenica zondag."],
+["De maanden","Gennaio is januari, febbraio februari, marzo maart, aprile april, maggio mei, giugno juni, luglio juli, agosto augustus, settembre september, ottobre oktober, novembre november en dicembre december."],
+["Een datum noemen","Je kunt bijvoorbeeld zeggen: Oggi è lunedì. Dat betekent vandaag is het maandag. Voor een datum gebruik je bijvoorbeeld il cinque maggio: vijf mei."]
+],
+words:[
+["Zero","Nul"],
+["Uno","Eén"],
+["Due","Twee"],
+["Tre","Drie"],
+["Quattro","Vier"],
+["Cinque","Vijf"],
+["Sei","Zes"],
+["Sette","Zeven"],
+["Otto","Acht"],
+["Nove","Negen"],
+["Dieci","Tien"],
+["Venti","Twintig"],
+["Lunedì","Maandag"],
+["Martedì","Dinsdag"],
+["Mercoledì","Woensdag"],
+["Giovedì","Donderdag"],
+["Venerdì","Vrijdag"],
+["Sabato","Zaterdag"],
+["Domenica","Zondag"],
+["Gennaio","Januari"],
+["Febbraio","Februari"],
+["Marzo","Maart"],
+["Aprile","April"],
+["Maggio","Mei"],
+["Giugno","Juni"],
+["Luglio","Juli"],
+["Agosto","Augustus"],
+["Settembre","September"],
+["Ottobre","Oktober"],
+["Novembre","November"],
+["Dicembre","December"],
+["Oggi","Vandaag"],
+["È","Is"]
+],
+examples:[
+["Ho venti anni.","Ik ben twintig jaar oud."],
+["Oggi è lunedì.","Vandaag is het maandag."],
+["Oggi è martedì.","Vandaag is het dinsdag."],
+["Il cinque maggio.","Vijf mei."],
+["Ho tre libri.","Ik heb drie boeken."],
+["Oggi è domenica.","Vandaag is het zondag."]
+],
+tip:"De dagen en maanden schrijf je in het Italiaans normaal gesproken met een kleine letter. Bijvoorbeeld lunedì en gennaio.",
+questions:[
+{q:"Wat betekent 'cinque'?",a:["Drie","Vier","Vijf","Zes"],c:2},
+{q:"Hoe zeg je twintig?",a:["Dieci","Dodici","Venti","Due"],c:2},
+{q:"Wat betekent 'lunedì'?",a:["Maandag","Dinsdag","Vrijdag","Zondag"],c:0},
+{q:"Welke maand betekent 'agosto'?",a:["April","Augustus","Oktober","December"],c:1},
+{q:"Wat betekent 'oggi'?",a:["Morgen","Gisteren","Vandaag","Maand"],c:2},
+{q:"Hoe zeg je 'drie boeken'?",a:["Tre libri","Tre libro","Due libri","Tre case"],c:0}
+],
+writing:[
+{prompt:"Schrijf in het Italiaans: Ik ben twintig jaar oud.",sample:"Ho venti anni."},
+{prompt:"Vertaal naar het Italiaans: Vandaag is het maandag.",sample:"Oggi è lunedì."}
+]
 },
+
 {
 title:"Veelgebruikte onregelmatige werkwoorden",
-topic:"Andare, fare, venire en stare.",
-content:`<h3>Andare – gaan</h3>
-<p>Vado, vai, va, andiamo, andate, vanno.</p>
-<h3>Fare – doen / maken</h3>
-<p>Faccio, fai, fa, facciamo, fate, fanno.</p>
-<h3>Venire – komen</h3>
-<p>Vengo, vieni, viene, veniamo, venite, vengono.</p>
-<h3>Stare – zijn / verblijven</h3>
-<p>Sto, stai, sta, stiamo, state, stanno.</p>
-<p>Voorbeeld: <b>Vado a casa.</b> – Ik ga naar huis.</p>`,
-q:"Hoe zeg je 'Ik ga'?",a:["Io vado","Io vai","Io andate"],c:0,e:"Andare wordt bij io: vado.",
-prompt:"Vertaal: Ik ga naar huis en jij komt mee.",example:"Vado a casa e tu vieni con me."
+topic:"Andare, fare, stare en venire",
+intro:"Niet alle Italiaanse werkwoorden volgen een vast patroon. In deze les leer je vier veelgebruikte onregelmatige werkwoorden waarmee je alledaagse zinnen kunt maken.",
+explanation:[
+["Andare – gaan","Io vado = ik ga. Tu vai = jij gaat. Lui/lei va = hij/zij gaat. Noi andiamo = wij gaan. Voi andate = jullie gaan. Loro vanno = zij gaan."],
+["Fare – doen of maken","Io faccio = ik doe of maak. Tu fai = jij doet of maakt. Lui/lei fa = hij/zij doet of maakt. Noi facciamo = wij doen of maken."],
+["Stare – zijn of blijven","Io sto = ik ben of blijf. Tu stai = jij bent of blijft. Lui/lei sta = hij/zij is of blijft. Noi stiamo = wij zijn of blijven."],
+["Venire – komen","Io vengo = ik kom. Tu vieni = jij komt. Lui/lei viene = hij/zij komt. Noi veniamo = wij komen."],
+["Gebruik in dagelijkse situaties","Je gebruikt deze werkwoorden bijvoorbeeld om te vertellen waar je naartoe gaat, wat je doet of waar iemand vandaan komt."]
+],
+words:[
+["Andare","Gaan"],
+["Vado","Ik ga"],
+["Vai","Jij gaat"],
+["Va","Hij/zij gaat"],
+["Andiamo","Wij gaan"],
+["Fare","Doen / maken"],
+["Faccio","Ik doe / maak"],
+["Fai","Jij doet / maakt"],
+["Stare","Zijn / blijven"],
+["Sto","Ik ben / blijf"],
+["Stai","Jij bent / blijft"],
+["Venire","Komen"],
+["Vengo","Ik kom"],
+["Vieni","Jij komt"],
+["Viene","Hij/zij komt"]
+],
+examples:[
+["Io vado a casa.","Ik ga naar huis."],
+["Tu vai al lavoro.","Jij gaat naar het werk."],
+["Che cosa fai?","Wat doe je?"],
+["Faccio una pizza.","Ik maak een pizza."],
+["Sto bene.","Het gaat goed met mij."],
+["Vengo da Olanda.","Ik kom uit Nederland."]
+],
+tip:"Leer de onregelmatige vormen als losse woorden. Je kunt niet altijd de gewone werkwoordsuitgangen gebruiken.",
+questions:[
+{q:"Wat betekent 'andare'?",a:["Komen","Gaan","Doen","Slapen"],c:1},
+{q:"Hoe zeg je 'ik ga'?",a:["Io vado","Io vai","Io va","Io andate"],c:0},
+{q:"Wat betekent 'faccio'?",a:["Ik kom","Ik blijf","Ik doe / maak","Ik ga"],c:2},
+{q:"Hoe zeg je 'jij bent / blijft' met stare?",a:["Sto","Sta","Stai","Stiamo"],c:2},
+{q:"Wat betekent 'vengo'?",a:["Ik ga","Ik kom","Ik maak","Ik slaap"],c:1},
+{q:"Hoe zeg je 'wij gaan'?",a:["Vanno","Andate","Andiamo","Vado"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik ga naar huis.",sample:"Io vado a casa."},
+{prompt:"Vertaal naar het Italiaans: Ik maak een pizza.",sample:"Faccio una pizza."}
+]
 },
+
 {
 title:"Bezittelijke voornaamwoorden",
-topic:"Mijn, jouw, zijn en haar.",
-content:`<h3>Bezittelijke woorden</h3>
-<p>Mio – mijn (mannelijk enkelvoud).</p><p>Mia – mijn (vrouwelijk enkelvoud).</p><p>Tuо – jouw (mannelijk).</p><p>Tua – jouw (vrouwelijk).</p><p>Suo / Sua – zijn of haar.</p><p>Nostro / Nostra – ons/onze.</p><p>Vostro / Vostra – jullie.</p>
-<p>Voorbeelden: <b>Il mio cane</b> – Mijn hond.</p><p><b>La mia casa</b> – Mijn huis.</p>
-<p>Meestal staat er een lidwoord voor het bezittelijke woord: il mio, la mia.</p>`,
-q:"Hoe zeg je 'mijn huis'?",a:["Il mio casa","La mia casa","La mio casa"],c:1,e:"Casa is vrouwelijk: la mia casa.",
-prompt:"Vertaal: Mijn hond en jouw huis.",example:"Il mio cane e la tua casa."
+topic:"Mijn, jouw en zijn in het Italiaans",
+intro:"In deze les leer je vertellen van wie iets is. Je leert woorden zoals mio, tuo en suo en ontdekt waarom ze soms veranderen.",
+explanation:[
+["Mio – mijn","Mio betekent mijn bij een mannelijk enkelvoud, bijvoorbeeld il mio libro: mijn boek. Bij een vrouwelijk enkelvoud gebruik je mia: la mia casa."],
+["Tuo – jouw","Tuo betekent jouw bij een mannelijk enkelvoud. Tua gebruik je bij een vrouwelijk enkelvoud. Bijvoorbeeld il tuo libro en la tua casa."],
+["Suo – zijn of haar","Suo en sua kunnen zowel zijn als haar betekenen. De vorm hangt af van het zelfstandig naamwoord dat erop volgt."],
+["Meervoud","Bij mannelijke meervouden gebruik je miei of tuoi. Bij vrouwelijke meervouden gebruik je mie of tue. Bijvoorbeeld i miei libri en le mie case."],
+["Het lidwoord","Bij de meeste bezittelijke voornaamwoorden gebruik je ook een lidwoord: il mio libro, la tua casa. Bij familieleden in het enkelvoud wordt het lidwoord vaak weggelaten, bijvoorbeeld mia madre."]
+],
+words:[
+["Mio","Mijn (mannelijk)"],
+["Mia","Mijn (vrouwelijk)"],
+["Miei","Mijn (mannelijk meervoud)"],
+["Mie","Mijn (vrouwelijk meervoud)"],
+["Tuo","Jouw (mannelijk)"],
+["Tua","Jouw (vrouwelijk)"],
+["Suo","Zijn / haar (mannelijk)"],
+["Sua","Zijn / haar (vrouwelijk)"],
+["Nostro","Ons (mannelijk)"],
+["Nostra","Ons (vrouwelijk)"],
+["Libro","Boek"],
+["Casa","Huis"],
+["Madre","Moeder"],
+["Padre","Vader"]
+],
+examples:[
+["Il mio libro.","Mijn boek."],
+["La mia casa.","Mijn huis."],
+["Il tuo libro.","Jouw boek."],
+["La tua casa.","Jouw huis."],
+["La sua madre.","Zijn/haar moeder (let op: normaal zonder lidwoord: sua madre)."],
+["Mio padre.","Mijn vader."]
+],
+tip:"Kijk bij mio, mia, tuo en tua naar het woord dat erachter staat. Het gaat om het geslacht van het bezit, niet om wie de eigenaar is.",
+questions:[
+{q:"Hoe zeg je 'mijn boek'?",a:["La mia libro","Il mio libro","Il tua libro","I miei libro"],c:1},
+{q:"Welke vorm past bij 'casa'?",a:["Mio","Mia","Miei","Mie"],c:1},
+{q:"Wat betekent 'tuo'?",a:["Mijn","Jouw (mannelijk)","Zijn","Ons"],c:1},
+{q:"Hoe zeg je 'jouw huis'?",a:["Il tuo casa","La tua casa","La tuo casa","Il mia casa"],c:1},
+{q:"Wat betekent 'suo'?",a:["Mijn","Jouw","Zijn of haar (mannelijk)","Ons"],c:2},
+{q:"Welke combinatie is correct?",a:["Il mia libro","La mio casa","Il mio libro","La tuo casa"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Mijn boek.",sample:"Il mio libro."},
+{prompt:"Vertaal naar het Italiaans: Jouw huis.",sample:"La tua casa."}
+]
 },
+
 {
 title:"Eten, drinken en bestellen",
-topic:"Bestellen in een Italiaans restaurant.",
-content:`<h3>Handige woorden</h3>
-<p>Acqua – water · Pane – brood · Vino – wijn · Caffè – koffie · Latte – melk · Pasta – pasta · Formaggio – kaas · Il conto – de rekening.</p>
-<h3>Bestellen</h3>
-<p><b>Vorrei un caffè.</b> – Ik zou graag een koffie willen.</p>
-<p><b>Un tavolo per due.</b> – Een tafel voor twee.</p>
-<p><b>Il conto, per favore.</b> – De rekening, alstublieft.</p>
-<p><b>Che cosa consiglia?</b> – Wat raadt u aan?</p>`,
-q:"Wat betekent 'Il conto, per favore'?",a:["De menukaart graag","De rekening graag","Een koffie graag"],c:1,e:"Il conto betekent de rekening.",
-prompt:"Vertaal: Ik wil graag een koffie en water.",example:"Vorrei un caffè e dell'acqua."
+topic:"Bestellen in een Italiaans restaurant",
+intro:"In deze les leer je woorden voor eten en drinken. Je oefent hoe je iets bestelt in een café of restaurant en hoe je beleefd om iets vraagt.",
+explanation:[
+["Eten en drinken","Mangiare betekent eten en bere betekent drinken. Acqua is water, pane is brood, pasta is pasta en caffè is koffie."],
+["Iets bestellen","Vorrei betekent ik zou graag willen. Dit is een beleefde manier om iets te bestellen. Vorrei un caffè betekent ik zou graag een koffie willen."],
+["Om iets vragen","Per favore betekent alstublieft. Grazie betekent dank je. Met deze woorden klinkt je bestelling vriendelijk."],
+["In een restaurant","Il conto betekent de rekening. Il menù betekent de menukaart. Cameriere betekent ober en cameriera betekent serveerster."],
+["Een kort gesprek","Je kunt bijvoorbeeld zeggen: Vorrei una pizza, per favore. Dat betekent: Ik zou graag een pizza willen, alstublieft."]
+],
+words:[
+["Mangiare","Eten"],
+["Bere","Drinken"],
+["Acqua","Water"],
+["Pane","Brood"],
+["Pasta","Pasta"],
+["Pizza","Pizza"],
+["Caffè","Koffie"],
+["Latte","Melk"],
+["Vino","Wijn"],
+["Vorrei","Ik zou graag willen"],
+["Per favore","Alstublieft"],
+["Grazie","Dank je"],
+["Il conto","De rekening"],
+["Il menù","De menukaart"],
+["Cameriere","Ober"]
+],
+examples:[
+["Vorrei un caffè.","Ik zou graag een koffie willen."],
+["Vorrei una pizza, per favore.","Ik zou graag een pizza willen, alstublieft."],
+["Un'acqua, per favore.","Een water, alstublieft."],
+["Grazie mille.","Heel erg bedankt."],
+["Il conto, per favore.","De rekening, alstublieft."],
+["Mangio la pasta.","Ik eet pasta."]
+],
+tip:"Vorrei is een handig woord om te onthouden. Je kunt het gebruiken bij het bestellen van bijna alles.",
+questions:[
+{q:"Wat betekent 'acqua'?",a:["Brood","Water","Melk","Koffie"],c:1},
+{q:"Hoe zeg je 'Ik zou graag een koffie willen'?",a:["Sono un caffè","Vorrei un caffè","Ho un caffè","Vado caffè"],c:1},
+{q:"Wat betekent 'grazie'?",a:["Alstublieft","De rekening","Dank je","Eten"],c:2},
+{q:"Hoe vraag je om de rekening?",a:["Il conto, per favore","Il pane, per favore","Vorrei casa","Grazie acqua"],c:0},
+{q:"Wat betekent 'bere'?",a:["Eten","Drinken","Bestellen","Betalen"],c:1},
+{q:"Wat betekent 'per favore'?",a:["Dank je","Goedemorgen","Alstublieft","Tot ziens"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik zou graag een pizza willen, alstublieft.",sample:"Vorrei una pizza, per favore."},
+{prompt:"Schrijf in het Italiaans: De rekening, alstublieft.",sample:"Il conto, per favore."}
+]
 },
+
 {
 title:"Familie en mensen beschrijven",
-topic:"Familieleden en persoonlijke beschrijvingen.",
-content:`<h3>Familie</h3>
-<p>Madre – moeder · Padre – vader · Fratello – broer · Sorella – zus · Figlio – zoon · Figlia – dochter · Marito – echtgenoot · Moglie – echtgenote.</p>
-<h3>Mensen beschrijven</h3>
-<p>Alto – lang · Basso – klein · Simpatico – aardig · Gentile – vriendelijk · Giovane – jong · Vecchio – oud.</p>
-<p><b>Mia sorella è simpatica.</b> – Mijn zus is aardig.</p>
-<p><b>Mio fratello è alto.</b> – Mijn broer is lang.</p>`,
-q:"Wat betekent 'sorella'?",a:["Broer","Zus","Moeder"],c:1,e:"Sorella betekent zus.",
-prompt:"Vertaal: Mijn broer is aardig en mijn zus is jong.",example:"Mio fratello è simpatico e mia sorella è giovane."
+topic:"Praten over je familie",
+intro:"In deze les leer je hoe je over je familie praat. Je leert familieleden benoemen en eenvoudige zinnen maken om mensen te beschrijven.",
+explanation:[
+["Familieleden","Madre betekent moeder, padre betekent vader, fratello betekent broer en sorella betekent zus."],
+["Meer familie","Figlio betekent zoon, figlia betekent dochter, nonno betekent opa en nonna betekent oma."],
+["Leeftijd en bezit","Je kunt vertellen hoe oud iemand is met avere. Mio fratello ha venti anni betekent mijn broer is twintig jaar oud."],
+["Mensen beschrijven","Alto betekent lang, basso betekent klein of kort, simpatico betekent aardig en intelligente betekent intelligent."],
+["Een korte beschrijving","Je kunt verschillende onderwerpen combineren. Mia sorella è simpatica betekent mijn zus is aardig."]
+],
+words:[
+["Madre","Moeder"],
+["Padre","Vader"],
+["Fratello","Broer"],
+["Sorella","Zus"],
+["Figlio","Zoon"],
+["Figlia","Dochter"],
+["Nonno","Opa"],
+["Nonna","Oma"],
+["Famiglia","Familie"],
+["Alto","Lang (mannelijk)"],
+["Alta","Lang (vrouwelijk)"],
+["Basso","Klein / kort (mannelijk)"],
+["Simpatica","Aardig (vrouwelijk)"],
+["Intelligente","Intelligent"],
+["Mio","Mijn (mannelijk)"],
+["Mia","Mijn (vrouwelijk)"],
+["Ha","Hij/zij heeft"]
+],
+examples:[
+["Mia madre.","Mijn moeder."],
+["Mio padre.","Mijn vader."],
+["Ho un fratello.","Ik heb een broer."],
+["Mia sorella è simpatica.","Mijn zus is aardig."],
+["Mio fratello è alto.","Mijn broer is lang."],
+["Mia nonna ha una casa.","Mijn oma heeft een huis."]
+],
+tip:"Familieleden zoals madre en padre zijn vrouwelijk of mannelijk. Gebruik daarom mia bij madre en mio bij padre.",
+questions:[
+{q:"Wat betekent 'fratello'?",a:["Zus","Broer","Vader","Opa"],c:1},
+{q:"Hoe zeg je 'mijn moeder'?",a:["Mio madre","Mia madre","Il mia madre","Miei madre"],c:1},
+{q:"Wat betekent 'nonna'?",a:["Opa","Oma","Moeder","Dochter"],c:1},
+{q:"Wat betekent 'simpatico'?",a:["Lang","Intelligent","Aardig","Klein"],c:2},
+{q:"Hoe zeg je 'Ik heb een broer'?",a:["Ho un fratello","Sono un fratello","Hai una sorella","Mia fratello"],c:0},
+{q:"Welke vorm past bij 'mio padre'?",a:["Mijn moeder","Mijn vader","Mijn broer","Mijn zoon"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik heb een zus.",sample:"Ho una sorella."},
+{prompt:"Vertaal naar het Italiaans: Mijn broer is lang.",sample:"Mio fratello è alto."}
+]
 },
+
 {
 title:"De klok en dagelijkse routines",
-topic:"Tijd aangeven en je dag beschrijven.",
-content:`<h3>De tijd vragen</h3>
-<p>Che ora è? – Hoe laat is het?</p><p>È l'una. – Het is één uur.</p><p>Sono le due. – Het is twee uur.</p><p>Sono le tre e mezza. – Het is half vier.</p>
-<h3>Dagelijkse activiteiten</h3>
-<p>Mi sveglio – Ik word wakker.</p><p>Faccio colazione – Ik ontbijt.</p><p>Lavoro – Ik werk.</p><p>Pranzo – Ik lunch.</p><p>Vado a dormire – Ik ga slapen.</p>`,
-q:"Hoe vraag je 'Hoe laat is het?'",a:["Che giorno è?","Che ora è?","Quando sei?"],c:1,e:"Che ora è? betekent hoe laat is het?",
-prompt:"Vertaal: Ik ontbijt om acht uur.",example:"Faccio colazione alle otto."
+topic:"Tijd en dagelijkse activiteiten",
+intro:"In deze les leer je hoe je de tijd vraagt en vertelt wat je dagelijks doet. Je gebruikt hiervoor bekende werkwoorden en nieuwe woorden over de dag.",
+explanation:[
+["De tijd vragen","Che ora è? betekent hoe laat is het? Je kunt ook zeggen Che ore sono? Het antwoord begint vaak met Sono le..."],
+["Hele uren","Sono le due betekent het is twee uur. È l'una betekent het is één uur. Voor één uur gebruik je dus è in plaats van sono."],
+["Minuten aangeven","Sono le tre e dieci betekent het is tien over drie. Sono le quattro e mezza betekent het is half vijf."],
+["Dagelijkse routines","Mi sveglio betekent ik word wakker. Faccio colazione betekent ik ontbijt. Lavoro betekent ik werk en dormo betekent ik slaap."],
+["Tijd combineren met activiteiten","Alle otto betekent om acht uur. Alle sette lavoro betekent om zeven uur werk ik. Je kunt zo vertellen hoe jouw dag verloopt."]
+],
+words:[
+["Che ora è?","Hoe laat is het?"],
+["Che ore sono?","Hoe laat is het?"],
+["È l'una","Het is één uur"],
+["Sono le due","Het is twee uur"],
+["E","En"],
+["Mezza","Half"],
+["Mattina","Ochtend"],
+["Pomeriggio","Middag"],
+["Sera","Avond"],
+["Notte","Nacht"],
+["Mi sveglio","Ik word wakker"],
+["Colazione","Ontbijt"],
+["Pranzo","Lunch"],
+["Cena","Avondeten"],
+["Lavoro","Ik werk"],
+["Dormo","Ik slaap"],
+["Alle","Om (tijdstip)"]
+],
+examples:[
+["Che ora è?","Hoe laat is het?"],
+["Sono le tre.","Het is drie uur."],
+["È l'una.","Het is één uur."],
+["Sono le quattro e mezza.","Het is half vijf."],
+["Faccio colazione alle otto.","Ik ontbijt om acht uur."],
+["Lavoro alle nove.","Ik werk om negen uur."]
+],
+tip:"Let op het verschil tussen è l'una (één uur) en sono le due (twee uur of later).",
+questions:[
+{q:"Hoe vraag je hoe laat het is?",a:["Come stai?","Che ora è?","Dove vai?","Che cosa fai?"],c:1},
+{q:"Hoe zeg je 'Het is één uur'?",a:["Sono le una","È l'una","Sono le due","È le una"],c:1},
+{q:"Wat betekent 'mezza'?",a:["Kwart","Tien","Half","Uur"],c:2},
+{q:"Wat betekent 'mi sveglio'?",a:["Ik slaap","Ik werk","Ik word wakker","Ik eet"],c:2},
+{q:"Hoe zeg je 'Het is drie uur'?",a:["Sono le tre","È l'una","Sono le cinque","È tre"],c:0},
+{q:"Wat betekent 'colazione'?",a:["Avondeten","Ontbijt","Lunch","Nacht"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Het is twee uur.",sample:"Sono le due."},
+{prompt:"Vertaal naar het Italiaans: Ik ontbijt om acht uur.",sample:"Faccio colazione alle otto."}
+]
 },
+
 {
 title:"Voorzetsels: A, IN, DI, DA en CON",
-topic:"Plaatsen en relaties aangeven.",
-content:`<h3>Veelgebruikte voorzetsels</h3>
-<p><b>A</b> – vaak bij steden en bestemmingen: Vado a Roma.</p>
-<p><b>In</b> – vaak bij landen en vervoermiddelen: Vivo in Italia.</p>
-<p><b>Di</b> – van: Sono di Amsterdam.</p>
-<p><b>Da</b> – bij / naar iemand: Vado da Marco.</p>
-<p><b>Con</b> – met: Vado con te.</p>
-<p>Voorzetsels kunnen met lidwoorden samensmelten. Bijvoorbeeld: a + il = al.</p>`,
-q:"Welk voorzetsel gebruik je meestal bij een stad?",a:["A","Con","Di"],c:0,e:"Je zegt bijvoorbeeld: Vado a Roma.",
-prompt:"Vertaal: Ik woon in Nederland en ga naar Rome.",example:"Abito nei Paesi Bassi e vado a Roma."
+topic:"Plaatsen, richtingen en verbindingen",
+intro:"In deze les leer je vijf belangrijke Italiaanse voorzetsels. Je gebruikt ze om te vertellen waar je bent, waar je naartoe gaat en met wie je iets doet.",
+explanation:[
+["A – naar of in","A gebruik je vaak bij steden en bepaalde plaatsen. Vado a Roma betekent ik ga naar Rome. Sono a casa betekent ik ben thuis."],
+["IN – in of naar","In gebruik je vaak bij landen en ruimtes. Vivo in Italia betekent ik woon in Italië. Sono in cucina betekent ik ben in de keuken."],
+["DI – van","Di geeft vaak bezit of herkomst aan. Sono di Amsterdam betekent ik kom uit Amsterdam. Il libro di Marco betekent het boek van Marco."],
+["DA – bij of vanaf","Da gebruik je bijvoorbeeld bij personen of om een vertrekpunt aan te geven. Vado da Marco betekent ik ga naar Marco."],
+["CON – met","Con betekent met. Vado con Maria betekent ik ga met Maria. Dit voorzetsel is meestal eenvoudig te gebruiken."]
+],
+words:[
+["A","Naar / in"],
+["In","In / naar"],
+["Di","Van"],
+["Da","Bij / vanaf"],
+["Con","Met"],
+["Casa","Huis"],
+["Italia","Italië"],
+["Roma","Rome"],
+["Amsterdam","Amsterdam"],
+["Cucina","Keuken"],
+["Amico","Vriend"],
+["Amica","Vriendin"],
+["Vado","Ik ga"],
+["Sono","Ik ben"],
+["Vivo","Ik woon"],
+["Marco","Marco"]
+],
+examples:[
+["Vado a Roma.","Ik ga naar Rome."],
+["Sono a casa.","Ik ben thuis."],
+["Vivo in Italia.","Ik woon in Italië."],
+["Sono di Amsterdam.","Ik kom uit Amsterdam."],
+["Vado da Marco.","Ik ga naar Marco."],
+["Vado con Maria.","Ik ga met Maria."]
+],
+tip:"Leer voorzetsels vooral in combinatie met voorbeeldzinnen. Er bestaan uitzonderingen en vaste combinaties die je later verder leert.",
+questions:[
+{q:"Welk voorzetsel gebruik je vaak bij een stad?",a:["Con","Di","A","Da"],c:2},
+{q:"Wat betekent 'con'?",a:["Van","Met","Naar","Vanaf"],c:1},
+{q:"Hoe zeg je 'Ik woon in Italië'?",a:["Vivo a Italia","Vivo in Italia","Sono di Italia","Vado con Italia"],c:1},
+{q:"Wat betekent 'di'?",a:["Met","Bij","Van","Naar"],c:2},
+{q:"Hoe zeg je 'Ik ben thuis'?",a:["Sono a casa","Vado casa","Sono con casa","Vivo da casa"],c:0},
+{q:"Wat betekent 'vado da Marco'?",a:["Ik woon in Rome","Ik ga naar Marco","Ik kom uit Marco","Ik ben Marco"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik ga naar Rome.",sample:"Vado a Roma."},
+{prompt:"Vertaal naar het Italiaans: Ik ga met Maria.",sample:"Vado con Maria."}
+]
 },
+
 {
 title:"Winkelen en boodschappen doen",
-topic:"Prijzen vragen en producten kopen.",
-content:`<h3>Woorden</h3>
-<p>Quanto costa? – Hoeveel kost het?</p><p>Mercato – markt · Negozio – winkel · Frutta – fruit · Verdura – groente · Carne – vlees · Pesce – vis.</p>
-<h3>Handige zinnen</h3>
-<p><b>Vorrei un chilo di mele.</b> – Ik wil graag een kilo appels.</p>
-<p><b>Quanto costano?</b> – Hoeveel kosten ze?</p>
-<p><b>È troppo caro.</b> – Het is te duur.</p>
-<p><b>Posso pagare con carta?</b> – Kan ik met pin betalen?</p>`,
-q:"Wat betekent 'Quanto costa?'",a:["Waar is de winkel?","Hoeveel kost het?","Wat wil je kopen?"],c:1,e:"Quanto costa? is de vraag naar de prijs.",
-prompt:"Vertaal: Ik wil graag een kilo appels.",example:"Vorrei un chilo di mele."
+topic:"Prijzen vragen en producten kopen",
+intro:"Je leert in deze les hoe je boodschappen doet in Italië. Je oefent met producten, prijzen en beleefde vragen in een winkel.",
+explanation:[
+["Producten benoemen","Pane betekent brood, latte betekent melk, acqua betekent water, frutta betekent fruit en verdura betekent groente."],
+["Hoeveel kost het?","Quanto costa? betekent hoeveel kost het? Bij meerdere producten kun je vragen Quanto costano?"],
+["Een hoeveelheid vragen","Vorrei un chilo di mele betekent ik zou graag een kilo appels willen. Un chilo betekent één kilo en mezzo betekent half."],
+["Beleefd bestellen","Vorrei betekent ik zou graag willen. Per favore betekent alstublieft. Grazie betekent dank je."],
+["Betalen","Posso pagare con carta? betekent kan ik met kaart betalen? Contanti betekent contant geld en carta betekent kaart."]
+],
+words:[
+["Negozio","Winkel"],
+["Mercato","Markt"],
+["Pane","Brood"],
+["Latte","Melk"],
+["Acqua","Water"],
+["Frutta","Fruit"],
+["Verdura","Groente"],
+["Mele","Appels"],
+["Formaggio","Kaas"],
+["Carne","Vlees"],
+["Quanto costa?","Hoeveel kost het?"],
+["Vorrei","Ik zou graag willen"],
+["Un chilo","Een kilo"],
+["Mezzo","Half"],
+["Carta","Kaart"],
+["Contanti","Contant geld"],
+["Pagare","Betalen"]
+],
+examples:[
+["Quanto costa?","Hoeveel kost het?"],
+["Vorrei del pane, per favore.","Ik zou graag wat brood willen, alstublieft."],
+["Un chilo di mele.","Een kilo appels."],
+["Vorrei del formaggio.","Ik zou graag wat kaas willen."],
+["Posso pagare con carta?","Kan ik met kaart betalen?"],
+["Pago in contanti.","Ik betaal contant."]
+],
+tip:"Gebruik 'vorrei' als je iets op een beleefde manier wilt vragen. Dat werkt zowel in een winkel als in een restaurant.",
+questions:[
+{q:"Wat betekent 'negozio'?",a:["Markt","Winkel","Brood","Kaas"],c:1},
+{q:"Hoe vraag je hoeveel iets kost?",a:["Come stai?","Quanto costa?","Dove vai?","Che ora è?"],c:1},
+{q:"Wat betekent 'mele'?",a:["Peren","Appels","Melk","Brood"],c:1},
+{q:"Hoe zeg je 'een kilo appels'?",a:["Un chilo di mele","Una mele chilo","Due pane","Un litro mele"],c:0},
+{q:"Wat betekent 'pagare'?",a:["Kopen","Eten","Betalen","Wonen"],c:2},
+{q:"Hoe vraag je of je met kaart kunt betalen?",a:["Posso pagare con carta?","Quanto costa carta?","Vorrei una carta?","Sono carta?"],c:0}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Hoeveel kost het?",sample:"Quanto costa?"},
+{prompt:"Vertaal naar het Italiaans: Ik zou graag een kilo appels willen.",sample:"Vorrei un chilo di mele."}
+]
 },
+
 {
 title:"Kunnen, willen en moeten",
-topic:"Potere, volere en dovere.",
-content:`<h3>Drie belangrijke werkwoorden</h3>
-<p><b>Potere</b> – kunnen: posso, puoi, può, possiamo, potete, possono.</p>
-<p><b>Volere</b> – willen: voglio, vuoi, vuole, vogliamo, volete, vogliono.</p>
-<p><b>Dovere</b> – moeten: devo, devi, deve, dobbiamo, dovete, devono.</p>
-<p>Daarna volgt meestal een heel werkwoord.</p>
-<p><b>Posso parlare?</b> – Mag ik spreken?</p>
-<p><b>Voglio mangiare.</b> – Ik wil eten.</p>
-<p><b>Devo lavorare.</b> – Ik moet werken.</p>`,
-q:"Wat betekent 'Devo lavorare'?",a:["Ik wil werken","Ik moet werken","Ik kan werken"],c:1,e:"Devo betekent ik moet.",
-prompt:"Vertaal: Ik wil eten, maar ik moet werken.",example:"Voglio mangiare, ma devo lavorare."
+topic:"Potere, volere en dovere",
+intro:"Met deze drie werkwoorden kun je vertellen wat je kunt, wilt of moet doen. Ze zijn erg belangrijk in dagelijkse gesprekken.",
+explanation:[
+["Potere – kunnen","Potere betekent kunnen of mogen. Io posso betekent ik kan. Tu puoi betekent jij kunt. Posso parlare italiano? betekent kan ik Italiaans spreken?"],
+["Volere – willen","Volere betekent willen. Io voglio betekent ik wil. Tu vuoi betekent jij wilt. Voglio mangiare betekent ik wil eten."],
+["Dovere – moeten","Dovere betekent moeten. Io devo betekent ik moet. Tu devi betekent jij moet. Devo lavorare betekent ik moet werken."],
+["Werkwoord combineren","Na potere, volere en dovere volgt meestal een werkwoord in de infinitief. Bijvoorbeeld voglio mangiare, posso parlare en devo dormire."],
+["In een gesprek","Je kunt nu vertellen wat je wilt doen, wat je moet doen en wat je kunt. Dat maakt je gesprekken meteen een stuk uitgebreider."]
+],
+words:[
+["Potere","Kunnen / mogen"],
+["Posso","Ik kan / mag"],
+["Puoi","Jij kunt / mag"],
+["Volere","Willen"],
+["Voglio","Ik wil"],
+["Vuoi","Jij wilt"],
+["Dovere","Moeten"],
+["Devo","Ik moet"],
+["Devi","Jij moet"],
+["Parlare","Spreken"],
+["Mangiare","Eten"],
+["Dormire","Slapen"],
+["Lavorare","Werken"],
+["Andare","Gaan"],
+["Oggi","Vandaag"]
+],
+examples:[
+["Posso parlare italiano.","Ik kan Italiaans spreken."],
+["Voglio mangiare.","Ik wil eten."],
+["Devo lavorare.","Ik moet werken."],
+["Vuoi dormire?","Wil jij slapen?"],
+["Posso andare a casa?","Mag ik naar huis gaan?"],
+["Oggi devo lavorare.","Vandaag moet ik werken."]
+],
+tip:"Na posso, voglio en devo gebruik je meestal het hele werkwoord. Dus 'voglio mangiare' en niet 'voglio mangio'.",
+questions:[
+{q:"Wat betekent 'potere'?",a:["Willen","Moeten","Kunnen / mogen","Eten"],c:2},
+{q:"Hoe zeg je 'ik wil eten'?",a:["Voglio mangiare","Devo mangio","Posso mangia","Voglio mangio"],c:0},
+{q:"Wat betekent 'devo'?",a:["Ik kan","Ik wil","Ik moet","Ik ga"],c:2},
+{q:"Hoe zeg je 'jij kunt'?",a:["Posso","Puoi","Può","Possiamo"],c:1},
+{q:"Welke vorm is correct?",a:["Devo lavorare","Devo lavoro","Devo lavora","Devo lavoriamo"],c:0},
+{q:"Wat betekent 'vuoi'?",a:["Ik wil","Jij wilt","Jij moet","Ik kan"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik wil eten.",sample:"Voglio mangiare."},
+{prompt:"Vertaal naar het Italiaans: Ik moet werken.",sample:"Devo lavorare."}
+]
 },
+
 {
 title:"De weg vragen en richtingen",
-topic:"De weg vragen en begrijpen.",
-content:`<h3>Richtingen</h3>
-<p>Destra – rechts · Sinistra – links · Dritto – rechtdoor · Vicino – dichtbij · Lontano – ver.</p>
-<h3>Vragen</h3>
-<p><b>Dov'è la stazione?</b> – Waar is het station?</p>
-<p><b>Come arrivo al centro?</b> – Hoe kom ik in het centrum?</p>
-<p><b>È lontano?</b> – Is het ver?</p>
-<p><b>Giri a destra.</b> – U slaat rechtsaf.</p>`,
-q:"Wat betekent 'sinistra'?",a:["Rechts","Links","Rechtdoor"],c:1,e:"Sinistra betekent links.",
-prompt:"Vertaal: Ga rechtdoor en sla linksaf.",example:"Vai dritto e gira a sinistra."
+topic:"De weg vinden in Italië",
+intro:"Je leert hoe je de weg vraagt en eenvoudige aanwijzingen begrijpt. Handig wanneer je op vakantie bent en een bestemming zoekt.",
+explanation:[
+["De weg vragen","Dov'è...? betekent waar is...? Dov'è la stazione? betekent waar is het station? Per andare a...? betekent hoe kom ik bij...?"],
+["Links en rechts","A sinistra betekent naar links. A destra betekent naar rechts. Dritto betekent rechtdoor."],
+["Plaatsen in de stad","Stazione betekent station, banca betekent bank, farmacia betekent apotheek en piazza betekent plein."],
+["Afstanden","Vicino betekent dichtbij en lontano betekent ver weg. È vicino betekent het is dichtbij."],
+["Een route begrijpen","Vai dritto betekent ga rechtdoor. Gira a destra betekent sla rechtsaf. Gira a sinistra betekent sla linksaf."]
+],
+words:[
+["Dov'è?","Waar is?"],
+["Stazione","Station"],
+["Banca","Bank"],
+["Farmacia","Apotheek"],
+["Piazza","Plein"],
+["A sinistra","Naar links"],
+["A destra","Naar rechts"],
+["Dritto","Rechtdoor"],
+["Vicino","Dichtbij"],
+["Lontano","Ver weg"],
+["Vai","Jij gaat"],
+["Gira","Sla af"],
+["Strada","Straat"],
+["Dove","Waar"],
+["Per favore","Alstublieft"]
+],
+examples:[
+["Dov'è la stazione?","Waar is het station?"],
+["Dov'è la farmacia?","Waar is de apotheek?"],
+["Vai dritto.","Ga rechtdoor."],
+["Gira a destra.","Sla rechtsaf."],
+["Gira a sinistra.","Sla linksaf."],
+["La banca è vicino.","De bank is dichtbij."]
+],
+tip:"Onthoud vooral 'a destra' en 'a sinistra'. Deze twee woorden zijn erg handig wanneer je de weg vraagt.",
+questions:[
+{q:"Wat betekent 'a destra'?",a:["Links","Rechts","Rechtdoor","Dichtbij"],c:1},
+{q:"Hoe zeg je 'Waar is het station?'",a:["Dove sei?","Dov'è la stazione?","Quanto costa?","Come ti chiami?"],c:1},
+{q:"Wat betekent 'dritto'?",a:["Links","Rechts","Rechtdoor","Ver weg"],c:2},
+{q:"Wat betekent 'farmacia'?",a:["Bank","Station","Apotheek","Plein"],c:2},
+{q:"Hoe zeg je 'Sla linksaf'?",a:["Gira a destra","Vai dritto","Gira a sinistra","Vado a casa"],c:2},
+{q:"Wat betekent 'vicino'?",a:["Ver weg","Dichtbij","Links","Rechts"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Waar is de apotheek?",sample:"Dov'è la farmacia?"},
+{prompt:"Vertaal naar het Italiaans: Ga rechtdoor en sla rechtsaf.",sample:"Vai dritto e gira a destra."}
+]
 },
+
 {
 title:"Reizen, hotels en vervoer",
-topic:"Een reis plannen en een hotel gebruiken.",
-content:`<h3>Vervoer</h3>
-<p>Treno – trein · Autobus – bus · Aereo – vliegtuig · Macchina – auto · Biglietto – kaartje · Stazione – station.</p>
-<h3>Op reis</h3>
-<p><b>Ho una prenotazione.</b> – Ik heb een reservering.</p>
-<p><b>Vorrei una camera.</b> – Ik wil graag een kamer.</p>
-<p><b>A che ora parte il treno?</b> – Hoe laat vertrekt de trein?</p>
-<p><b>Un biglietto per Roma.</b> – Een kaartje naar Rome.</p>`,
-q:"Wat betekent 'Ho una prenotazione'?",a:["Ik heb een reservering","Ik zoek een station","Ik wil een kaartje"],c:0,e:"Prenotazione betekent reservering.",
-prompt:"Vertaal: Ik heb een reservering voor twee personen.",example:"Ho una prenotazione per due persone."
+topic:"Een reis plannen en een hotel boeken",
+intro:"In deze les leer je woorden en zinnen die je tijdens een reis kunt gebruiken. Je oefent met vervoer, hotels en het reserveren van een kamer.",
+explanation:[
+["Vervoer","Treno betekent trein, autobus betekent bus, macchina betekent auto en aereo betekent vliegtuig. Viaggiare betekent reizen."],
+["Een hotel zoeken","Albergo betekent hotel en camera betekent kamer. Vorrei una camera betekent ik zou graag een kamer willen."],
+["Reserveren","Ho una prenotazione betekent ik heb een reservering. Vorrei prenotare una camera betekent ik zou graag een kamer willen reserveren."],
+["Inchecken","Documento betekent document en passaporto betekent paspoort. Posso avere la chiave? betekent mag ik de sleutel?" ],
+["Handige reisvragen","A che ora parte il treno? betekent hoe laat vertrekt de trein? Dove si trova l'hotel? betekent waar bevindt het hotel zich?"]
+],
+words:[
+["Viaggiare","Reizen"],
+["Treno","Trein"],
+["Autobus","Bus"],
+["Macchina","Auto"],
+["Aereo","Vliegtuig"],
+["Albergo","Hotel"],
+["Camera","Kamer"],
+["Prenotazione","Reservering"],
+["Prenotare","Reserveren"],
+["Documento","Document"],
+["Passaporto","Paspoort"],
+["Chiave","Sleutel"],
+["Partire","Vertrekken"],
+["Arrivare","Aankomen"],
+["A che ora?","Hoe laat?"],
+["Dove si trova?","Waar bevindt zich?"]
+],
+examples:[
+["Vorrei una camera.","Ik zou graag een kamer willen."],
+["Ho una prenotazione.","Ik heb een reservering."],
+["Vorrei prenotare una camera.","Ik zou graag een kamer willen reserveren."],
+["Dov'è l'albergo?","Waar is het hotel?"],
+["A che ora parte il treno?","Hoe laat vertrekt de trein?"],
+["Dove si trova la stazione?","Waar bevindt het station zich?"]
+],
+tip:"Bewaar de zin 'Ho una prenotazione'. Deze is handig wanneer je bij een hotel aankomt en wilt vertellen dat je een reservering hebt.",
+questions:[
+{q:"Wat betekent 'treno'?",a:["Bus","Trein","Auto","Vliegtuig"],c:1},
+{q:"Hoe zeg je 'Ik heb een reservering'?",a:["Sono una camera","Ho una prenotazione","Vado un albergo","Voglio treno"],c:1},
+{q:"Wat betekent 'albergo'?",a:["Restaurant","Station","Hotel","Paspoort"],c:2},
+{q:"Wat betekent 'chiave'?",a:["Kamer","Sleutel","Trein","Reservering"],c:1},
+{q:"Hoe vraag je hoe laat de trein vertrekt?",a:["Dove va il treno?","A che ora parte il treno?","Quanto costa il treno?","Che cosa è il treno?"],c:1},
+{q:"Wat betekent 'prenotare'?",a:["Reizen","Vertrekken","Reserveren","Aankomen"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Ik heb een reservering.",sample:"Ho una prenotazione."},
+{prompt:"Vertaal naar het Italiaans: Ik zou graag een kamer willen reserveren.",sample:"Vorrei prenotare una camera."}
+]
 },
+
 {
 title:"Het weer en de seizoenen",
-topic:"Het weer beschrijven.",
-content:`<h3>Het weer</h3>
-<p>Fa caldo – Het is warm.</p><p>Fa freddo – Het is koud.</p><p>Piove – Het regent.</p><p>C'è il sole – De zon schijnt.</p><p>C'è vento – Het waait.</p><p>È nuvoloso – Het is bewolkt.</p>
-<h3>Seizoenen</h3>
-<p>Primavera – lente · Estate – zomer · Autunno – herfst · Inverno – winter.</p>
-<p><b>In estate fa caldo.</b> – In de zomer is het warm.</p>`,
-q:"Wat betekent 'Piove'?",a:["Het sneeuwt","Het regent","Het waait"],c:1,e:"Piove betekent het regent.",
-prompt:"Vertaal: Vandaag schijnt de zon, maar het is koud.",example:"Oggi c'è il sole, ma fa freddo."
+topic:"Praten over het weer",
+intro:"In deze les leer je hoe je het weer beschrijft. Je leert praten over zon, regen, temperatuur en de verschillende seizoenen.",
+explanation:[
+["Het weer vragen","Che tempo fa? betekent wat voor weer is het? Dit is een veelgebruikte vraag wanneer je over het weer wilt praten."],
+["Het weer beschrijven","Fa caldo betekent het is warm. Fa freddo betekent het is koud. Piove betekent het regent en nevica betekent het sneeuwt."],
+["De seizoenen","Primavera is lente, estate is zomer, autunno is herfst en inverno is winter."],
+["Temperatuur","Caldo betekent warm en freddo betekent koud. Fa molto caldo betekent het is erg warm."],
+["Je eigen mening geven","Mi piace l'estate betekent ik vind de zomer leuk. Non mi piace la pioggia betekent ik houd niet van regen."]
+],
+words:[
+["Tempo","Weer / tijd"],
+["Sole","Zon"],
+["Pioggia","Regen"],
+["Neve","Sneeuw"],
+["Vento","Wind"],
+["Caldo","Warm"],
+["Freddo","Koud"],
+["Piove","Het regent"],
+["Nevica","Het sneeuwt"],
+["Primavera","Lente"],
+["Estate","Zomer"],
+["Autunno","Herfst"],
+["Inverno","Winter"],
+["Oggi","Vandaag"],
+["Mi piace","Ik vind leuk"],
+["Non mi piace","Ik vind niet leuk"]
+],
+examples:[
+["Che tempo fa?","Wat voor weer is het?"],
+["Oggi fa caldo.","Vandaag is het warm."],
+["Oggi fa freddo.","Vandaag is het koud."],
+["Piove molto.","Het regent veel."],
+["In inverno nevica.","In de winter sneeuwt het."],
+["Mi piace l'estate.","Ik vind de zomer leuk."]
+],
+tip:"In het Italiaans gebruik je 'fa' bij veel weersbeschrijvingen. Bijvoorbeeld fa caldo en fa freddo.",
+questions:[
+{q:"Hoe vraag je wat voor weer het is?",a:["Che ora è?","Che tempo fa?","Come stai?","Dove vai?"],c:1},
+{q:"Wat betekent 'piove'?",a:["Het sneeuwt","Het waait","Het regent","Het is warm"],c:2},
+{q:"Wat betekent 'estate'?",a:["Winter","Zomer","Lente","Herfst"],c:1},
+{q:"Hoe zeg je 'Het is koud'?",a:["Fa caldo","Fa freddo","Piove","Nevica"],c:1},
+{q:"Wat betekent 'primavera'?",a:["Lente","Zomer","Herfst","Winter"],c:0},
+{q:"Wat betekent 'mi piace'?",a:["Ik wil","Ik heb","Ik vind leuk","Ik moet"],c:2}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Vandaag is het warm.",sample:"Oggi fa caldo."},
+{prompt:"Vertaal naar het Italiaans: Ik vind de zomer leuk.",sample:"Mi piace l'estate."}
+]
 },
+
 {
 title:"Een uitgebreider gesprek",
-topic:"Jezelf voorstellen en over je dagelijks leven praten.",
-content:`<h3>Een gesprek beginnen</h3>
-<p><b>Come ti chiami?</b> – Hoe heet je?</p>
-<p><b>Di dove sei?</b> – Waar kom je vandaan?</p>
-<p><b>Dove abiti?</b> – Waar woon je?</p>
-<p><b>Che lavoro fai?</b> – Wat voor werk doe je?</p>
-<p><b>Cosa ti piace fare?</b> – Wat doe je graag?</p>
-<h3>Antwoorden</h3>
-<p>Mi chiamo ... – Ik heet ...</p>
-<p>Sono olandese. – Ik ben Nederlands.</p>
-<p>Abito nei Paesi Bassi. – Ik woon in Nederland.</p>
-<p>Mi piace viaggiare. – Ik reis graag.</p>`,
-q:"Hoe vraag je 'Wat voor werk doe je?'",a:["Che lavoro fai?","Dove lavori?","Come stai?"],c:0,e:"Che lavoro fai? vraagt naar iemands werk.",
-prompt:"Stel jezelf voor: naam, nationaliteit en woonplaats.",example:"Mi chiamo Marco. Sono olandese e abito nei Paesi Bassi."
+topic:"Een gesprek voeren over jezelf en anderen",
+intro:"In deze les combineer je wat je tot nu toe hebt geleerd. Je oefent met begroeten, jezelf voorstellen, vragen stellen en vertellen over je dagelijkse leven.",
+explanation:[
+["Een gesprek beginnen","Gebruik Ciao of Buongiorno om iemand te begroeten. Daarna kun je vragen Come stai? Dat betekent hoe gaat het met je?"],
+["Vertellen over jezelf","Je kunt zeggen Mi chiamo... (ik heet...), Sono olandese (ik ben Nederlands) en Abito in Olanda (ik woon in Nederland)."],
+["Vragen stellen","Come ti chiami? betekent hoe heet je? Dove abiti? betekent waar woon je? Che lavoro fai? betekent wat voor werk doe je?"],
+["Over je dag praten","Je kunt vertellen wat je doet met werkwoorden zoals lavoro (ik werk), mangio (ik eet) en dormo (ik slaap)."],
+["Een gesprek afronden","Gebruik È stato un piacere om te zeggen het was aangenaam. Arrivederci betekent tot ziens."]
+],
+words:[
+["Come stai?","Hoe gaat het?"],
+["Bene","Goed"],
+["Molto bene","Heel goed"],
+["Così così","Zo zo"],
+["Mi chiamo","Ik heet"],
+["Abito","Ik woon"],
+["Olanda","Nederland"],
+["Lavoro","Ik werk"],
+["Che lavoro fai?","Wat voor werk doe je?"],
+["Mangio","Ik eet"],
+["Dormo","Ik slaap"],
+["Dopo","Daarna"],
+["Oggi","Vandaag"],
+["Piacere","Aangenaam"],
+["Arrivederci","Tot ziens"]
+],
+examples:[
+["Ciao, come stai?","Hallo, hoe gaat het?"],
+["Sto molto bene, grazie.","Het gaat heel goed, dank je."],
+["Mi chiamo Anna.","Ik heet Anna."],
+["Sono olandese.","Ik ben Nederlands."],
+["Abito in Olanda.","Ik woon in Nederland."],
+["Che lavoro fai?","Wat voor werk doe je?"],
+["Lavoro in un ufficio.","Ik werk op een kantoor."]
+],
+tip:"Probeer niet ieder woord afzonderlijk te vertalen. Leer hele zinnen. Daardoor kun je sneller een echt gesprek voeren.",
+questions:[
+{q:"Hoe vraag je hoe het gaat?",a:["Dove abiti?","Come stai?","Che ora è?","Quanto costa?"],c:1},
+{q:"Wat betekent 'mi chiamo'?",a:["Ik woon","Ik werk","Ik heet","Ik slaap"],c:2},
+{q:"Hoe zeg je 'Ik woon in Nederland'?",a:["Sono in Olanda","Abito in Olanda","Vado Olanda","Ho Olanda"],c:1},
+{q:"Wat betekent 'così così'?",a:["Heel goed","Slecht","Zo zo","Dank je"],c:2},
+{q:"Hoe vraag je wat voor werk iemand doet?",a:["Che lavoro fai?","Come ti chiami?","Dove vai?","Che tempo fa?"],c:0},
+{q:"Wat betekent 'arrivederci'?",a:["Hallo","Tot ziens","Dank je","Aangenaam"],c:1}
+],
+writing:[
+{prompt:"Schrijf jezelf in het Italiaans voor. Gebruik je naam en vertel dat je Nederlands bent.",sample:"Ciao, mi chiamo [naam]. Sono olandese."},
+{prompt:"Vertaal naar het Italiaans: Ik woon in Nederland en ik werk.",sample:"Abito in Olanda e lavoro."}
+]
 },
+
 {
 title:"Het voltooid verleden – PASSATO PROSSIMO",
-topic:"Vertellen wat je hebt gedaan.",
-content:`<h3>De passato prossimo</h3>
-<p>Je gebruikt deze tijd voor gebeurtenissen die in het verleden hebben plaatsgevonden.</p>
-<p>De basis is: <b>avere of essere + voltooid deelwoord.</b></p>
-<h3>Met avere</h3>
-<p>Ho mangiato – Ik heb gegeten.</p><p>Hai lavorato – Jij hebt gewerkt.</p><p>Abbiamo visto – Wij hebben gezien.</p>
-<h3>Met essere</h3>
-<p>Sono andato – Ik ben gegaan (mannelijk).</p><p>Sono andata – Ik ben gegaan (vrouwelijk).</p>
-<p>Bij veel bewegingswerkwoorden gebruik je essere. Het voltooid deelwoord past zich dan vaak aan.</p>`,
-q:"Hoe zeg je 'Ik heb gegeten'?",a:["Sono mangiato","Ho mangiato","Hai mangiato"],c:1,e:"Mangiare gebruikt avere: ho mangiato.",
-prompt:"Vertaal: Gisteren heb ik gewerkt en gegeten.",example:"Ieri ho lavorato e ho mangiato."
+topic:"Vertellen wat je hebt gedaan",
+intro:"In deze les leer je hoe je in het Italiaans over het verleden praat. Je leert het passato prossimo, een belangrijke tijd om te vertellen wat je hebt gedaan.",
+explanation:[
+["Wat is passato prossimo?","Je gebruikt deze tijd om over afgeronde gebeurtenissen te praten. Bijvoorbeeld: Ho mangiato betekent ik heb gegeten."],
+["Avere als hulpwerkwoord","Veel werkwoorden gebruiken avere. Je combineert avere met een voltooid deelwoord. Ho betekent ik heb en mangiato betekent gegeten."],
+["Voltooide deelwoorden","Bij regelmatige werkwoorden op -are wordt de uitgang meestal -ato. Parlare wordt parlato. Bij -ere wordt het vaak -uto en bij -ire vaak -ito."],
+["Voorbeelden","Ho lavorato betekent ik heb gewerkt. Ho dormito betekent ik heb geslapen. Ho bevuto betekent ik heb gedronken."],
+["Essere als hulpwerkwoord","Sommige werkwoorden gebruiken essere, bijvoorbeeld andare. Sono andato betekent ik ben gegaan (mannelijk). Sono andata gebruik je als de spreker vrouwelijk is."]
+],
+words:[
+["Ieri","Gisteren"],
+["Oggi","Vandaag"],
+["Ho mangiato","Ik heb gegeten"],
+["Ho bevuto","Ik heb gedronken"],
+["Ho lavorato","Ik heb gewerkt"],
+["Ho dormito","Ik heb geslapen"],
+["Ho parlato","Ik heb gesproken"],
+["Sono andato","Ik ben gegaan (mannelijk)"],
+["Sono andata","Ik ben gegaan (vrouwelijk)"],
+["Mangiato","Gegeten"],
+["Bevuto","Gedronken"],
+["Lavorato","Gewerkt"],
+["Dormito","Geslapen"],
+["Parlato","Gesproken"],
+["Ieri sera","Gisteravond"]
+],
+examples:[
+["Ieri ho lavorato.","Gisteren heb ik gewerkt."],
+["Ho mangiato una pizza.","Ik heb een pizza gegeten."],
+["Ho bevuto acqua.","Ik heb water gedronken."],
+["Ho dormito molto.","Ik heb veel geslapen."],
+["Ho parlato italiano.","Ik heb Italiaans gesproken."],
+["Sono andato a Roma.","Ik ben naar Rome gegaan."]
+],
+tip:"Begin met de combinaties die je vaak gebruikt: ho mangiato, ho lavorato en ho dormito. Zo raak je gewend aan de verleden tijd.",
+questions:[
+{q:"Wat betekent 'ho mangiato'?",a:["Ik eet","Ik heb gegeten","Ik ga eten","Ik wil eten"],c:1},
+{q:"Welke vorm is het voltooid deelwoord van 'parlare'?",a:["Parlato","Parlare","Parli","Parlando"],c:0},
+{q:"Wat betekent 'ieri'?",a:["Morgen","Vandaag","Gisteren","Volgende week"],c:2},
+{q:"Hoe zeg je 'Ik heb gewerkt'?",a:["Sono lavorato","Ho lavorato","Ho lavoro","Lavoro ieri"],c:1},
+{q:"Welk hulpwerkwoord gebruikt 'andare' in dit voorbeeld?",a:["Avere","Fare","Essere","Stare"],c:2},
+{q:"Wat betekent 'ho dormito'?",a:["Ik heb gegeten","Ik heb geslapen","Ik heb gewerkt","Ik ben gegaan"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Gisteren heb ik gewerkt.",sample:"Ieri ho lavorato."},
+{prompt:"Vertaal naar het Italiaans: Ik heb een pizza gegeten.",sample:"Ho mangiato una pizza."}
+]
 },
+
 {
 title:"Toekomstplannen maken",
-topic:"De toekomst beschrijven.",
-content:`<h3>De eenvoudige toekomende tijd</h3>
-<p>Bij regelmatige werkwoorden verander je de uitgang naar de toekomende tijd.</p>
-<p>Parlare → parlerò (ik zal praten).</p>
-<p>Prendere → prenderò (ik zal nemen).</p>
-<p>Dormire → dormirò (ik zal slapen).</p>
-<h3>Veelgebruikte uitdrukkingen</h3>
-<p><b>Domani</b> – morgen.</p><p><b>La prossima settimana</b> – volgende week.</p>
-<p><b>Andrò in Italia.</b> – Ik zal naar Italië gaan.</p>
-<p>In gesprekken kun je ook de tegenwoordige tijd met een tijdsaanduiding gebruiken.</p>`,
-q:"Wat betekent 'Domani lavorerò'?",a:["Gisteren werkte ik","Morgen zal ik werken","Ik werk vandaag"],c:1,e:"Domani betekent morgen en lavorerò is ik zal werken.",
-prompt:"Vertaal: Volgende week ga ik naar Italië.",example:"La prossima settimana andrò in Italia."
+topic:"Vertellen wat je gaat doen",
+intro:"In deze les leer je vertellen over plannen voor de toekomst. Je oefent met de uitdrukking stare per en met de tegenwoordige tijd om toekomstige plannen aan te geven.",
+explanation:[
+["De toekomst met andare","Een veelgebruikte manier om plannen te vertellen is andare + a + infinitief. Vado a mangiare betekent ik ga eten."],
+["De vervoeging van andare","Io vado = ik ga. Tu vai = jij gaat. Lui/lei va = hij/zij gaat. Noi andiamo = wij gaan."],
+["Tijdsaanduidingen","Domani betekent morgen. La prossima settimana betekent volgende week. Più tardi betekent later."],
+["Plannen beschrijven","Domani vado a lavorare betekent morgen ga ik werken. Stasera vado a mangiare una pizza betekent vanavond ga ik een pizza eten."],
+["Een vraag stellen","Che cosa fai domani? betekent wat ga je morgen doen? Je kunt antwoorden met Domani vado a..."]
+],
+words:[
+["Domani","Morgen"],
+["Stasera","Vanavond"],
+["Più tardi","Later"],
+["La prossima settimana","Volgende week"],
+["Vado","Ik ga"],
+["Vai","Jij gaat"],
+["Andiamo","Wij gaan"],
+["Mangiare","Eten"],
+["Lavorare","Werken"],
+["Viaggiare","Reizen"],
+["Visitare","Bezoeken"],
+["Partire","Vertrekken"],
+["Che cosa fai?","Wat ga je doen?"],
+["Vacanza","Vakantie"],
+["Presto","Binnenkort / vroeg"]
+],
+examples:[
+["Domani vado a lavorare.","Morgen ga ik werken."],
+["Stasera vado a mangiare una pizza.","Vanavond ga ik een pizza eten."],
+["La prossima settimana vado in Italia.","Volgende week ga ik naar Italië."],
+["Che cosa fai domani?","Wat ga je morgen doen?"],
+["Domani vado a visitare Roma.","Morgen ga ik Rome bezoeken."],
+["Più tardi vado a casa.","Later ga ik naar huis."]
+],
+tip:"Je hoeft niet altijd een aparte toekomende tijd te gebruiken. Italianen gebruiken vaak de tegenwoordige tijd wanneer duidelijk is dat het om een toekomstig plan gaat.",
+questions:[
+{q:"Wat betekent 'domani'?",a:["Gisteren","Vandaag","Morgen","Vanavond"],c:2},
+{q:"Hoe zeg je 'Ik ga werken'?",a:["Vado a lavorare","Sono lavorare","Ho lavoro","Vado lavoro"],c:0},
+{q:"Wat betekent 'stasera'?",a:["Vanmorgen","Vanavond","Morgen","Volgende week"],c:1},
+{q:"Welke vorm betekent 'wij gaan'?",a:["Vado","Vai","Va","Andiamo"],c:3},
+{q:"Wat betekent 'visitare'?",a:["Werken","Bezoeken","Eten","Slapen"],c:1},
+{q:"Hoe vraag je 'Wat ga je morgen doen?'",a:["Dove sei domani?","Che cosa fai domani?","Quanto costa domani?","Come ti chiami domani?"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Morgen ga ik werken.",sample:"Domani vado a lavorare."},
+{prompt:"Schrijf in het Italiaans: Vanavond ga ik een pizza eten.",sample:"Stasera vado a mangiare una pizza."}
+]
 },
+
 {
 title:"Vergelijken",
-topic:"Groter, kleiner, beter en meer.",
-content:`<h3>Vergelijkingen</h3>
-<p>Più ... di – meer ... dan.</p><p>Meno ... di – minder ... dan.</p><p>Come – even ... als.</p>
-<p><b>Roma è più grande di Pisa.</b> – Rome is groter dan Pisa.</p>
-<p><b>Questo è meno caro.</b> – Dit is minder duur.</p>
-<p><b>Marco è alto come Luca.</b> – Marco is even lang als Luca.</p>
-<h3>Onregelmatige vormen</h3>
-<p>Buono → migliore (beter).</p><p>Cattivo → peggiore (slechter).</p>`,
-q:"Wat betekent 'più grande di'?",a:["Kleiner dan","Groter dan","Even groot als"],c:1,e:"Più grande di betekent groter dan.",
-prompt:"Vertaal: Rome is groter dan Pisa.",example:"Roma è più grande di Pisa."
+topic:"Groter, kleiner, beter en minder",
+intro:"In deze les leer je hoe je mensen, plaatsen en dingen met elkaar vergelijkt. Je leert woorden zoals più, meno en migliore.",
+explanation:[
+["Più – meer","Più betekent meer. Più grande betekent groter. La casa è più grande betekent het huis is groter."],
+["Meno – minder","Meno betekent minder. Meno caro betekent goedkoper. Questa casa è meno cara betekent dit huis is minder duur."],
+["Meglio en migliore","Meglio betekent beter wanneer je een handeling of situatie beschrijft. Migliore betekent beter wanneer je een zelfstandig naamwoord beschrijft."],
+["Confronto con di","Je kunt di gebruiken om twee dingen te vergelijken. Roma è più grande di Pisa betekent Rome is groter dan Pisa."],
+["Zo goed als","Tanto... quanto betekent even... als. Deze constructie gebruik je wanneer twee dingen gelijk zijn."]
+],
+words:[
+["Più","Meer"],
+["Meno","Minder"],
+["Grande","Groot"],
+["Piccolo","Klein"],
+["Caro","Duur"],
+["Economico","Goedkoop"],
+["Meglio","Beter"],
+["Migliore","Beter / de beste"],
+["Peggiore","Slechter"],
+["Veloce","Snel"],
+["Lento","Langzaam"],
+["Di","Dan / van"],
+["Tanto","Evenveel / zo veel"],
+["Quanto","Hoeveel / als"],
+["Questa","Deze (vrouwelijk)"]
+],
+examples:[
+["Roma è più grande di Pisa.","Rome is groter dan Pisa."],
+["Questa casa è meno cara.","Dit huis is minder duur."],
+["Il treno è più veloce.","De trein is sneller."],
+["Oggi sto meglio.","Vandaag voel ik me beter."],
+["Questo libro è migliore.","Dit boek is beter."],
+["La macchina è più lenta.","De auto is langzamer."]
+],
+tip:"Gebruik 'più' voor meer en 'meno' voor minder. Bij vergelijkingen komt 'di' vaak vóór de persoon of het ding waarmee je vergelijkt.",
+questions:[
+{q:"Wat betekent 'più'?",a:["Minder","Meer","Beter","Langzaam"],c:1},
+{q:"Wat betekent 'meno'?",a:["Meer","Groter","Minder","Snel"],c:2},
+{q:"Hoe zeg je 'groter'?",a:["Più grande","Meno grande","Grande più","Grande meno"],c:0},
+{q:"Wat betekent 'veloce'?",a:["Langzaam","Snel","Duur","Goedkoop"],c:1},
+{q:"Welke zin betekent 'Rome is groter dan Pisa'?",a:["Roma è meno grande di Pisa","Roma è più grande di Pisa","Roma è grande più Pisa","Roma è migliore Pisa"],c:1},
+{q:"Wat betekent 'meglio'?",a:["Slechter","Beter","Groter","Minder"],c:1}
+],
+writing:[
+{prompt:"Vertaal naar het Italiaans: Rome is groter dan Pisa.",sample:"Roma è più grande di Pisa."},
+{prompt:"Vertaal naar het Italiaans: Vandaag voel ik me beter.",sample:"Oggi sto meglio."}
+]
 },
+
 {
 title:"Een gesprek zelfstandig voeren",
-topic:"Alles combineren in een praktijksituatie.",
-content:`<h3>Situatie: je ontmoet iemand in Italië.</h3>
-<p><b>A:</b> Ciao! Come ti chiami?</p><p>Hoi! Hoe heet je?</p>
-<p><b>B:</b> Mi chiamo Anna. E tu?</p><p>Ik heet Anna. En jij?</p>
-<p><b>A:</b> Mi chiamo Marco. Di dove sei?</p><p>Ik heet Marco. Waar kom je vandaan?</p>
-<p><b>B:</b> Sono olandese. Abito nei Paesi Bassi.</p><p>Ik ben Nederlands. Ik woon in Nederland.</p>
-<p><b>A:</b> Cosa fai nel tempo libero?</p><p>Wat doe je in je vrije tijd?</p>
-<p><b>B:</b> Mi piace viaggiare e leggere.</p><p>Ik reis en lees graag.</p>
-<p>Probeer zelf een vergelijkbaar gesprek te voeren. Je kunt je antwoorden hardop oefenen.</p>`,
-q:"Wat betekent 'Mi piace viaggiare'?",a:["Ik werk graag","Ik reis graag","Ik woon graag"],c:1,e:"Mi piace betekent ik vind leuk; viaggiare is reizen.",
-prompt:"Schrijf een korte introductie over jezelf in het Italiaans.",example:"Ciao! Mi chiamo ... Sono olandese e abito nei Paesi Bassi. Mi piace viaggiare e imparare l'italiano."
+topic:"Alles combineren in een natuurlijk gesprek",
+intro:"Je gaat in deze les zelfstandig een gesprek voeren. Je combineert begroetingen, vragen, beschrijvingen, dagelijkse activiteiten en eenvoudige toekomstplannen.",
+explanation:[
+["Een gesprek openen","Begin met Ciao of Buongiorno. Vraag vervolgens Come stai? en reageer bijvoorbeeld met Sto bene, grazie."],
+["Jezelf voorstellen","Gebruik Mi chiamo... om je naam te noemen. Vertel waar je vandaan komt met Sono olandese en waar je woont met Abito in Olanda."],
+["Over werk en vrije tijd praten","Je kunt vertellen wat je doet met Lavoro en wat je leuk vindt met Mi piace. Bijvoorbeeld Mi piace viaggiare betekent ik vind reizen leuk."],
+["Vragen aan de ander","Stel vragen zoals Dove abiti? (waar woon je?), Che lavoro fai? (wat voor werk doe je?) en Che cosa fai nel tempo libero? (wat doe je in je vrije tijd?)."],
+["Een gesprek afronden","Gebruik È stato un piacere (het was aangenaam) en Arrivederci (tot ziens). Probeer het gesprek rustig op te bouwen."]
+],
+words:[
+["Nel tempo libero","In de vrije tijd"],
+["Mi piace","Ik vind leuk"],
+["Viaggiare","Reizen"],
+["Sport","Sport"],
+["Lavoro","Werk"],
+["Abito","Ik woon"],
+["Vengo","Ik kom"],
+["Olanda","Nederland"],
+["Bene","Goed"],
+["Grazie","Dank je"],
+["Perché","Waarom / omdat"],
+["Anche","Ook"],
+["Sempre","Altijd"],
+["Qualche volta","Soms"],
+["È stato un piacere","Het was aangenaam"]
+],
+examples:[
+["Ciao, come stai?","Hallo, hoe gaat het?"],
+["Sto bene, grazie. E tu?","Het gaat goed, dank je. En met jou?"],
+["Mi chiamo Luca e sono olandese.","Ik heet Luca en ik ben Nederlands."],
+["Abito in Olanda.","Ik woon in Nederland."],
+["Mi piace viaggiare.","Ik vind reizen leuk."],
+["Che cosa fai nel tempo libero?","Wat doe je in je vrije tijd?"],
+["È stato un piacere.","Het was aangenaam."]
+],
+tip:"Je hoeft niet direct perfecte zinnen te maken. Het belangrijkste is dat je durft te spreken en bekende woorden met elkaar combineert.",
+questions:[
+{q:"Wat betekent 'nel tempo libero'?",a:["Op het werk","In de vrije tijd","Volgende week","Gisteren"],c:1},
+{q:"Hoe zeg je 'Ik vind reizen leuk'?",a:["Mi piace viaggiare","Voglio viaggiare","Sono viaggiare","Ho viaggiare"],c:0},
+{q:"Wat betekent 'anche'?",a:["Altijd","Soms","Ook","Waarom"],c:2},
+{q:"Hoe vraag je wat iemand in zijn vrije tijd doet?",a:["Che ora è?","Che cosa fai nel tempo libero?","Dove vai?","Quanto costa?"],c:1},
+{q:"Wat betekent 'qualche volta'?",a:["Altijd","Nooit","Soms","Morgen"],c:2},
+{q:"Hoe zeg je 'Het was aangenaam'?",a:["Mi piace","È stato un piacere","Sto bene","Arrivederci"],c:1}
+],
+writing:[
+{prompt:"Schrijf een korte introductie in het Italiaans. Vertel je naam, dat je Nederlands bent en waar je woont.",sample:"Ciao, mi chiamo [naam]. Sono olandese e abito in Olanda."},
+{prompt:"Schrijf in het Italiaans wat je leuk vindt om in je vrije tijd te doen.",sample:"Nel tempo libero mi piace viaggiare."}
+]
 },
+
 {
 title:"Eindtoets – jouw Italiaanse basis",
-topic:"Herhaal de belangrijkste onderwerpen uit alle 24 lessen.",
-content:`<h3>Gefeliciteerd, je bent bij de eindtoets!</h3>
-<p>Je hebt de basis van de Italiaanse grammatica, woordenschat en dagelijkse gesprekken behandeld.</p>
-<h3>Herhaal deze onderwerpen</h3>
-<p>• Essere en avere.</p>
-<p>• Regelmatige en onregelmatige werkwoorden.</p>
-<p>• Lidwoorden en meervouden.</p>
-<p>• Voorzetsels en bezittelijke woorden.</p>
-<p>• Bestellen, reizen en de weg vragen.</p>
-<p>• Verleden tijd en toekomst.</p>
-<p>Neem rustig de tijd voor de quiz en schrijfopdracht. Je kunt de eerdere lessen altijd opnieuw bekijken.</p>`,
-q:"Hoe zeg je 'Ik ben Nederlands en ik heb een hond'?",a:["Sono olandese e ho un cane","Ho olandese e sono un cane","Sono olandese e sono un cane"],c:0,e:"Sono olandese = ik ben Nederlands. Ho un cane = ik heb een hond.",
-prompt:"Schrijf in het Italiaans: Stel jezelf voor, vertel waar je woont, wat je graag doet en wat je gisteren hebt gedaan.",example:"Ciao! Mi chiamo ... Sono olandese e abito nei Paesi Bassi. Mi piace viaggiare. Ieri ho lavorato e ho mangiato una pizza."
-}
+topic:"Herhaling van de belangrijkste onderdelen",
+intro:"Gefeliciteerd! Je bent aangekomen bij de laatste les. In deze les herhaal je de belangrijkste onderwerpen uit de cursus. Laat zien wat je hebt geleerd.",
+explanation:[
+["Jezelf voorstellen","Je kunt jezelf voorstellen met Mi chiamo..., Sono olandese en Abito in Olanda."],
+["Werkwoorden","Je hebt geleerd hoe je essere, avere en regelmatige werkwoorden vervoegt. Ook ken je belangrijke onregelmatige werkwoorden zoals andare, fare en venire."],
+["Zinnen bouwen","Je kunt eenvoudige zinnen maken met lidwoorden, zelfstandige naamwoorden, bijvoeglijke naamwoorden en voorzetsels."],
+["Praktische situaties","Je kunt iets bestellen, boodschappen doen, de weg vragen en eenvoudige gesprekken voeren tijdens een reis."],
+["Verleden en toekomst","Je kunt vertellen wat je hebt gedaan met het passato prossimo en plannen beschrijven met bijvoorbeeld domani vado a lavorare."]
+],
+words:[
+["Essere","Zijn"],
+["Avere","Hebben"],
+["Andare","Gaan"],
+["Fare","Doen / maken"],
+["Parlare","Spreken"],
+["Mangiare","Eten"],
+["Casa","Huis"],
+["Libro","Boek"],
+["Famiglia","Familie"],
+["Grazie","Dank je"],
+["Per favore","Alstublieft"],
+["Domani","Morgen"],
+["Ieri","Gisteren"],
+["Vorrei","Ik zou graag willen"],
+["Arrivederci","Tot ziens"]
+],
+examples:[
+["Mi chiamo Anna.","Ik heet Anna."],
+["Sono olandese.","Ik ben Nederlands."],
+["Ho un libro.","Ik heb een boek."],
+["Vado a casa.","Ik ga naar huis."],
+["Vorrei un caffè, per favore.","Ik zou graag een koffie willen, alstublieft."],
+["Ieri ho lavorato.","Gisteren heb ik gewerkt."],
+["Domani vado a Roma.","Morgen ga ik naar Rome."]
+],
+tip:"Je hoeft niet alles uit je hoofd te kennen. Gebruik de woorden en grammatica die je hebt geleerd en probeer zelf zinnen te maken. Dat is de beste manier om vooruitgang te boeken.",
+questions:[
+{q:"Wat betekent 'sono'?",a:["Ik heb","Ik ben","Ik ga","Ik wil"],c:1},
+{q:"Hoe zeg je 'Ik heb een boek'?",a:["Sono un libro","Ho un libro","Vado un libro","Hai un libro"],c:1},
+{q:"Wat betekent 'domani'?",a:["Gisteren","Vandaag","Morgen","Vanavond"],c:2},
+{q:"Hoe zeg je 'Ik zou graag een koffie willen'?",a:["Vorrei un caffè","Ho un caffè","Sono caffè","Vado caffè"],c:0},
+{q:"Wat betekent 'ieri ho lavorato'?",a:["Morgen ga ik werken","Ik werk vandaag","Gisteren heb ik gewerkt","Ik wil werken"],c:2},
+{q:"Wat betekent 'arrivederci'?",a:["Hallo","Dank je","Tot ziens","Alstublieft"],c:2}
+],
+writing:[
+{prompt:"Schrijf een korte introductie in het Italiaans met je naam, nationaliteit en woonplaats.",sample:"Ciao, mi chiamo [naam]. Sono olandese e abito in Olanda."},
+{prompt:"Schrijf drie Italiaanse zinnen: één over gisteren, één over vandaag en één over morgen.",sample:"Ieri ho lavorato. Oggi studio italiano. Domani vado a casa."}
+]
+},
+
+
 ];
 
-let completed=JSON.parse(localStorage.getItem('italiano25Done')||'[]');
-let current=0;
-let answered=false;
+// Voortgang opslaan
+const STORAGE_KEY = "italiano25Done_v3";
 
-function save(){
-localStorage.setItem('italiano25Done',JSON.stringify(completed));
-update();
+function loadProgress() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return Array.isArray(saved)
+            ? saved.filter(i => Number.isInteger(i) && i >= 0 && i < lessons.length)
+            : [];
+    } catch {
+        return [];
+    }
 }
-function update(){
-let n=completed.length;
-document.getElementById('bar').style.width=(n/25*100)+'%';
-document.getElementById('bar2').style.width=(n/25*100)+'%';
-document.getElementById('progressTitle').textContent=n+' van 25 lessen afgerond';
-document.getElementById('progressSub').textContent=n===25?'Fantastico! Je hebt alle lessen afgerond!':'Je bent '+Math.round(n/25*100)+'% onderweg.';
-document.getElementById('progressDetail').textContent='Je hebt '+n+' van de 25 lessen afgerond.';
-document.getElementById('doneList').textContent=completed.length?completed.map(i=>'Les '+(i+1)+': '+lessons[i].title).join(' · '):'Je hebt nog geen lessen afgerond.';
+
+let completedLessons = loadProgress();
+let currentLesson = 0;
+let answers = [];
+let writingAnswers = [];
+
+function saveProgress() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(completedLessons));
 }
-function showPage(id,btn){
-['home','course','progress','lessonPage'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==id));
-document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-if(btn)btn.classList.add('active');
-if(id==='course')renderList();
-if(id==='progress')update();
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
 }
-function renderList(){
-let box=document.getElementById('lessonList');
-box.innerHTML='';
-lessons.forEach((l,i)=>{
-let div=document.createElement('div');
-div.className='lesson';
-div.innerHTML='<div class="number">'+(i+1)+'</div><div class="info"><b>'+l.title+'</b><span class="muted">'+l.topic+'</span></div><div>'+(completed.includes(i)?'<span class="done">✓ Klaar</span>':'<span class="muted">10 min →</span>')+'</div>';
-div.onclick=()=>openLesson(i);
-box.appendChild(div);
-});
+
+function isUnlocked(index) {
+    return index === 0 || completedLessons.includes(index - 1);
 }
-function openLesson(i){
-current=i;
-showPage('lessonPage');
-let l=lessons[i];
-document.getElementById('lessonNumber').textContent='LES '+(i+1)+' VAN 25';
-document.getElementById('lessonTitle').textContent=l.title;
-document.getElementById('lessonContent').innerHTML=l.content;
-document.getElementById('question').textContent=l.q;
-document.getElementById('feedback').textContent='';
-document.getElementById('nextQuestion').classList.add('hidden');
-document.getElementById('writingCard').classList.add('hidden');
-document.getElementById('writingPrompt').textContent=l.prompt;
-document.getElementById('writingAnswer').value='';
-document.getElementById('example').classList.add('hidden');
-document.getElementById('example').textContent='Voorbeeld: '+l.example;
-answered=false;
-let box=document.getElementById('answers');
-box.innerHTML='';
-l.a.forEach((a,i)=>{
-let b=document.createElement('button');
-b.className='option';
-b.textContent=a;
-b.onclick=()=>checkAnswer(i);
-box.appendChild(b);
-});
+
+function updateHome() {
+    const count = completedLessons.length;
+    const percent = Math.round((count / lessons.length) * 100);
+
+    document.getElementById("overallProgress").style.width = percent + "%";
+    document.getElementById("progressText").textContent =
+        count + " van de " + lessons.length + " lessen afgerond (" + percent + "%)";
 }
-function checkAnswer(i){
-if(answered)return;
-answered=true;
-let l=lessons[current];
-let buttons=document.querySelectorAll('#answers button');
-buttons.forEach((b,j)=>{
-b.disabled=true;
-if(j===l.c)b.classList.add('correct');
-else if(j===i)b.classList.add('wrong');
-});
-document.getElementById('feedback').textContent=(i===l.c?'Goed gedaan! ✓ ':'Niet helemaal. ') + l.e;
-document.getElementById('nextQuestion').classList.remove('hidden');
+
+function hideAll() {
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("lessonList").classList.add("hidden");
+    document.getElementById("lessonView").classList.add("hidden");
 }
-function showWriting(){
-document.getElementById('writingCard').classList.remove('hidden');
-document.getElementById('writingCard').scrollIntoView({behavior:'smooth'});
+
+function goHome() {
+    hideAll();
+    document.getElementById("home").classList.remove("hidden");
+    updateHome();
 }
-function showExample(){
-document.getElementById('example').classList.remove('hidden');
+
+function showLessons() {
+    hideAll();
+    document.getElementById("lessonList").classList.remove("hidden");
+
+    const container = document.getElementById("lessons");
+    container.innerHTML = "";
+
+    lessons.forEach((lesson, index) => {
+        const unlocked = isUnlocked(index);
+        const completed = completedLessons.includes(index);
+
+        const item = document.createElement("div");
+        item.className = "panel";
+
+        const buttonText = completed
+            ? "Les opnieuw doen"
+            : unlocked
+                ? "Start les"
+                : "Nog niet beschikbaar";
+
+        item.innerHTML = `
+            <h3>${index + 1}. ${escapeHTML(lesson.title)}</h3>
+            <p>${escapeHTML(lesson.topic)}</p>
+            <p>${completed ? "✓ Afgerond" : unlocked ? "Beschikbaar" : "🔒 Eerst de vorige les afronden"}</p>
+            <button class="lesson-button" ${unlocked ? "" : "disabled"}>
+                ${buttonText}
+            </button>
+        `;
+
+        const button = item.querySelector("button");
+        if (unlocked) {
+            button.addEventListener("click", () => openLesson(index));
+        }
+
+        container.appendChild(item);
+    });
+
+    updateHome();
 }
-function finishLesson(){
-if(!completed.includes(current))completed.push(current);
-save();
-alert('Fantastico! Les '+(current+1)+' afgerond! 🇮🇹');
-if(current<24){
-if(confirm('Wil je direct doorgaan naar de volgende les?'))openLesson(current+1);
-else showPage('course',document.querySelectorAll('nav button')[1]);
-}else{
-alert('Gefeliciteerd! Je hebt alle 25 lessen afgerond!');
-showPage('progress',document.querySelectorAll('nav button')[2]);
+
+function openLesson(index) {
+    if (!isUnlocked(index)) return;
+
+    currentLesson = index;
+    answers = Array(lessons[index].questions.length).fill(null);
+    writingAnswers = Array(lessons[index].writing.length).fill("");
+
+    const lesson = lessons[index];
+    hideAll();
+
+    const view = document.getElementById("lessonView");
+    view.classList.remove("hidden");
+
+    const content = document.getElementById("lessonContent");
+
+    let html = `
+        <div class="panel">
+            <h2>Les ${index + 1}: ${escapeHTML(lesson.title)}</h2>
+            <p>${escapeHTML(lesson.intro)}</p>
+        </div>
+        <div class="panel">
+            <h3>Uitleg</h3>
+    `;
+
+    lesson.explanation.forEach(item => {
+        html += `
+            <h4>${escapeHTML(item[0])}</h4>
+            <p>${escapeHTML(item[1])}</p>
+        `;
+    });
+
+    html += `</div><div class="panel"><h3>Nieuwe woorden</h3>`;
+
+    lesson.words.forEach(word => {
+        html += `
+            <p><strong>${escapeHTML(word[0])}</strong> – ${escapeHTML(word[1])}</p>
+        `;
+    });
+
+    html += `</div><div class="panel"><h3>Voorbeelden</h3>`;
+
+    lesson.examples.forEach(example => {
+        html += `
+            <p><strong>${escapeHTML(example[0])}</strong><br>
+            ${escapeHTML(example[1])}</p>
+        `;
+    });
+
+    html += `
+        </div>
+        <div class="panel">
+            <h3>Tip</h3>
+            <p>${escapeHTML(lesson.tip)}</p>
+        </div>
+        <div class="panel">
+            <h3>Schrijfopdrachten</h3>
+            <p>Schrijf zelf een antwoord bij beide opdrachten. Je kunt daarna het voorbeeld bekijken.</p>
+    `;
+
+    lesson.writing.forEach((task, i) => {
+        html += `
+            <div class="question">
+                <p><strong>${i + 1}. ${escapeHTML(task.prompt)}</strong></p>
+                <textarea id="writing${i}" rows="3" placeholder="Schrijf hier je Italiaanse zin..."></textarea>
+                <button type="button" class="sample-button" data-index="${i}">
+                    Toon voorbeeldantwoord
+                </button>
+                <p id="sample${i}" class="hidden">
+                    <strong>Voorbeeld:</strong> ${escapeHTML(task.sample)}
+                </p>
+            </div>
+        `;
+    });
+
+    html += `</div><div class="panel"><h3>Meerkeuzetoets</h3>
+        <p>Beantwoord alle vragen. Je moet meer dan 80% halen om de volgende les vrij te spelen.</p>`;
+
+    lesson.questions.forEach((question, i) => {
+        html += `
+            <div class="question" id="question${i}">
+                <p><strong>${i + 1}. ${escapeHTML(question.q)}</strong></p>
+        `;
+
+        question.a.forEach((option, j) => {
+            html += `
+                <button type="button"
+                    class="option"
+                    data-question="${i}"
+                    data-answer="${j}">
+                    ${escapeHTML(option)}
+                </button>
+            `;
+        });
+
+        html += `</div>`;
+    });
+
+    html += `
+        </div>
+        <div class="panel">
+            <button type="button" id="checkAnswers">Controleer mijn antwoorden</button>
+            <div id="quizResult"></div>
+        </div>
+        <button type="button" id="backToLessons">Terug naar lessen</button>
+    `;
+
+    content.innerHTML = html;
+
+    content.querySelectorAll(".option").forEach(button => {
+        button.addEventListener("click", () => {
+            const q = Number(button.dataset.question);
+            const a = Number(button.dataset.answer);
+
+            answers[q] = a;
+
+            content.querySelectorAll(
+                `.option[data-question="${q}"]`
+            ).forEach(option => {
+                option.classList.remove("selected");
+            });
+
+            button.classList.add("selected");
+        });
+    });
+
+    content.querySelectorAll(".sample-button").forEach(button => {
+        button.addEventListener("click", () => {
+            const i = Number(button.dataset.index);
+            document.getElementById("sample" + i).classList.toggle("hidden");
+        });
+    });
+
+    lesson.writing.forEach((task, i) => {
+        document.getElementById("writing" + i).addEventListener("input", event => {
+            writingAnswers[i] = event.target.value.trim();
+        });
+    });
+
+    document.getElementById("checkAnswers").addEventListener("click", checkAnswers);
+    document.getElementById("backToLessons").addEventListener("click", showLessons);
 }
+
+function checkAnswers() {
+    const lesson = lessons[currentLesson];
+    const result = document.getElementById("quizResult");
+
+    if (answers.some(answer => answer === null)) {
+        result.innerHTML = "<p>Beantwoord eerst alle meerkeuzevragen.</p>";
+        return;
+    }
+
+    writingAnswers = lesson.writing.map((task, i) =>
+        document.getElementById("writing" + i).value.trim()
+    );
+
+    if (writingAnswers.some(answer => answer.length === 0)) {
+        result.innerHTML = "<p>Vul eerst beide schrijfopdrachten in.</p>";
+        return;
+    }
+
+    let correct = 0;
+
+    lesson.questions.forEach((question, i) => {
+        const questionBox = document.getElementById("question" + i);
+        const options = questionBox.querySelectorAll(".option");
+
+        options.forEach((option, j) => {
+            option.classList.remove("correct", "wrong");
+
+            if (j === question.c) {
+                option.classList.add("correct");
+            }
+
+            if (j === answers[i] && j !== question.c) {
+                option.classList.add("wrong");
+            }
+        });
+
+        if (answers[i] === question.c) {
+            correct++;
+        }
+    });
+
+    const percentage = (correct / lesson.questions.length) * 100;
+    const passed = percentage > 80;
+
+    if (passed && !completedLessons.includes(currentLesson)) {
+        completedLessons.push(currentLesson);
+        completedLessons.sort((a, b) => a - b);
+        saveProgress();
+    }
+
+    let message = `
+        <h3>Je resultaat</h3>
+        <p>${correct} van de ${lesson.questions.length} vragen goed.</p>
+        <p>Score: ${Math.round(percentage)}%</p>
+    `;
+
+    if (passed) {
+        message += `
+            <h3>Goed gedaan! Je hebt de les gehaald.</h3>
+            <p>Je hebt de schrijfopdrachten ingevuld. Vergelijk je antwoorden met de voorbeeldzinnen.</p>
+        `;
+
+        if (currentLesson === lessons.length - 1) {
+            message += `
+                <h3>Gefeliciteerd! 🎉</h3>
+                <p>Je hebt alle 25 lessen afgerond en de cursus voltooid!</p>
+            `;
+        } else {
+            message += `
+                <p>Les ${currentLesson + 2} is nu vrijgespeeld.</p>
+            `;
+        }
+    } else {
+        message += `
+            <h3>Nog even oefenen!</h3>
+            <p>Je hebt meer dan 80% nodig. Bekijk de uitleg en probeer het opnieuw.</p>
+        `;
+    }
+
+    message += `
+        <button type="button" id="retryLesson">Les opnieuw proberen</button>
+        <button type="button" id="lessonOverview">Terug naar lessen</button>
+    `;
+
+    result.innerHTML = message;
+
+    document.getElementById("retryLesson").addEventListener("click", () => {
+        openLesson(currentLesson);
+    });
+
+    document.getElementById("lessonOverview").addEventListener("click", showLessons);
+
+    updateHome();
 }
-function resetProgress(){
-if(confirm('Weet je zeker dat je alle voortgang wilt wissen?')){
-completed=[];
-save();
-renderList();
-}
-}
-update();
-renderList();
+
+window.showLessons = showLessons;
+window.goHome = goHome;
+
+// Startpagina tonen
+updateHome();
+
+
+// DE VOLGENDE LESSEN WORDEN IN DE VOLGENDE DELEN TOEGEVOEGD.
+
+// DE VOLGENDE LESSEN WORDEN IN DE VOLGENDE DELEN TOEGEVOEGD.
+
+// DE VOLGENDE LESSEN WORDEN IN DE VOLGENDE DELEN TOEGEVOEGD.
+
+// DE VOLGENDE LESSEN WORDEN IN DE VOLGENDE DELEN TOEGEVOEGD.
 </script>
 </body>
 </html>
