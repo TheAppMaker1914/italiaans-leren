@@ -1843,6 +1843,7 @@ function showQuestion() {
     updateQuizProgress();
 }
 
+
 function selectAnswer(index, selectedButton) {
     const question = lessonQuestions[currentQuestion];
     const correctIndex = question[2];
@@ -1852,7 +1853,6 @@ function selectAnswer(index, selectedButton) {
 
     const buttons = answersArea.querySelectorAll("button");
 
-    // Voorkom dat een vraag meerdere keren wordt beantwoord.
     if (Array.from(buttons).some(btn => btn.disabled)) return;
 
     buttons.forEach(btn => btn.disabled = true);
@@ -1860,32 +1860,37 @@ function selectAnswer(index, selectedButton) {
     if (index === correctIndex) {
         correctAnswers++;
         selectedButton.classList.add("correct");
+
         if (feedback) {
             feedback.textContent = "Goed gedaan! " + question[3];
+            feedback.className = "feedback good";
         }
     } else {
-        selectedButton.classList.add("incorrect");
+        selectedButton.classList.add("wrong");
         buttons[correctIndex].classList.add("correct");
 
         if (feedback) {
-            feedback.textContent =
-                "Helaas, dat is niet goed. " + question[3];
+            feedback.textContent = "Helaas, dat is niet goed. " + question[3];
+            feedback.className = "feedback bad";
         }
     }
 
     if (nextButton) {
+        nextButton.disabled = false;
         nextButton.classList.remove("hidden");
+
         nextButton.textContent =
             currentQuestion === lessonQuestions.length - 1
                 ? "Bekijk resultaat"
                 : "Volgende vraag";
-       nextButton.onclick = function() {
-    currentQuestion++;
-    showQuestion();
+
+        nextButton.onclick = nextQuestion;
     }
 
     updateQuizProgress();
 }
+
+
 
 function nextQuestion() {
     currentQuestion++;
@@ -1925,8 +1930,10 @@ function finishQuiz() {
 
     if (questionArea) questionArea.textContent = "Je quizresultaat";
     if (answersArea) answersArea.innerHTML = "";
-    if (nextButton) nextButton.classList.add("hidden");
-
+    if (nextButton) {
+    nextButton.classList.add("hidden");
+    nextButton.disabled = true;
+}
     if (feedback) {
         feedback.innerHTML = `
             <h3>${correctAnswers} van de ${total} goed</h3>
