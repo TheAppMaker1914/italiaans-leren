@@ -1879,7 +1879,9 @@ function selectAnswer(index, selectedButton) {
             currentQuestion === lessonQuestions.length - 1
                 ? "Bekijk resultaat"
                 : "Volgende vraag";
-        nextButton.onclick = nextQuestion;
+       nextButton.onclick = function() {
+    currentQuestion++;
+    showQuestion();
     }
 
     updateQuizProgress();
